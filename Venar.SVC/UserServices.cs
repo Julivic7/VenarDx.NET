@@ -7,6 +7,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Venar.Entities;
 using System.Data;
+using Venar.Data;
+using Venar.DTO;
+
 
 namespace Venar.SVC
 {
@@ -14,12 +17,13 @@ namespace Venar.SVC
     {
         DataServices dataService = new DataServices();
         private List<User> users;
-
+         
         public UserServices()
         {
 
             users = new List<User>();
         }
+        //hacer private
         public void CreateMedic(string userName, string name, string lastName, string dni, string mail, string password, string speciality, string medicalRegistration)
         {
             Debug.WriteLine(userName);
@@ -261,25 +265,24 @@ namespace Venar.SVC
         }
 
         //BORRAR======================================================
-        public void CreateUser(string userName, string name, string lastName, string dni, string mail, string password, string userType)
-        {
-            Debug.WriteLine(userName);
+        private void CreateUser(UserDto userDto)
+        {           
 
             var conn = dataService.OpenConnection();
 
-            string query = "INSERT INTO Users (username, name, lastName, dni , mail, password, userType) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password, @UserType)";
+            string query = "INSERT INTO Users (username, name, lastName, dni , mail, password) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password)";
 
             // Create a new SqlConnection and SqlCommand
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 // Add parameters to the command to prevent SQL injection
-                cmd.Parameters.AddWithValue("@UserName", userName);
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@Mail", mail);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@UserType", userType);
+                cmd.Parameters.AddWithValue("@UserName", userDto.UserName);
+                cmd.Parameters.AddWithValue("@Name", userDto.Name);
+                cmd.Parameters.AddWithValue("@LastName", userDto.LastName);
+                cmd.Parameters.AddWithValue("@Dni", userDto.Dni);
+                cmd.Parameters.AddWithValue("@Mail", userDto.Mail);
+                cmd.Parameters.AddWithValue("@Password", userDto.Password);
+                //cmd.Parameters.AddWithValue("@UserType", userDto.UserType);
 
                 // Execute the command
                 cmd.ExecuteNonQuery();
@@ -287,6 +290,66 @@ namespace Venar.SVC
           
         }
         //BORRAR======================================================
+
+        //CORREGIR Y ORDENAR
+        private void ValidatedUser(ResultDto result, UserDto obj)
+        {
+            if (string.IsNullOrEmpty(obj.Name))
+            {
+                result.Errors.Add("El Nombre es obligatorio.");
+            }
+            else if (string.IsNullOrEmpty(obj.Mail))
+            {
+                result.Errors.Add("El E-mail es obligatorio.");
+            }
+            else if (string.IsNullOrEmpty(obj.Password))
+            {
+                result.Errors.Add("Debe ingresar una contraseña.");
+            }
+            else if (string.IsNullOrEmpty(obj.UserName))
+            {
+                result.Errors.Add("Debe ingresar el nombre de Usuario.");
+            }
+            else if (string.IsNullOrEmpty(obj.LastName))
+            {
+                result.Errors.Add("Debe ingresar el nombre de Usuario.");
+            }
+            else if (string.IsNullOrEmpty(obj.Dni))
+            {
+                result.Errors.Add("Debe ingresar el DNI.");
+            }
+       
+            
+        }
+
+        public ResultDto CreateReallyUser(UserDto obj)
+        {           
+            try
+            {
+                var resultDto = new ResultDto();
+
+                ValidatedUser(resultDto, obj);
+
+                if(resultDto.IsSuccess)
+                {
+                    CreateUser(obj);
+                }
+                return resultDto;
+
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+             
+        }
+
+
+
     }
 }
+
+
 

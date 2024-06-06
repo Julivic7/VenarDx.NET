@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 
-namespace Ventar.Services
+namespace Venar.SVC
 {
     public class MailService
     {

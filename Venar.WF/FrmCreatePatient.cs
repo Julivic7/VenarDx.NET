@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Venar.SVC;
 using System.Windows.Forms;
+using Venar.Entities;
 
 
 namespace Venar.WF
@@ -16,6 +17,7 @@ namespace Venar.WF
     public partial class FrmCreatePatient : Form
     {
         UserServices UserServices;
+        //PatientsSVC patientsSVC;
         public FrmCreatePatient()
         {
             InitializeComponent();
@@ -67,8 +69,10 @@ namespace Venar.WF
 
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }
      

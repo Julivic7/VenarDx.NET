@@ -39,24 +39,29 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.RaisedHorizontal;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1 });
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Location = new Point(14, 16);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(588, 334);
+            dataGridView1.Size = new Size(714, 445);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Column1
             // 
             Column1.HeaderText = "Nombre";
+            Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
+            Column1.Width = 125;
             // 
             // FrmPatients
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(612, 358);
+            ClientSize = new Size(741, 477);
             Controls.Add(dataGridView1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmPatients";
             Text = "FrmLogin2";
             Load += FrmPatients_Load;

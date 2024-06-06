@@ -21,7 +21,7 @@ namespace Venar.WF
         //Buscar como hacer para extraer el nombre de usuario
         //de la base de datos pasando como parametro el mail
 
-        DataServices dataServices = new DataServices();
+        //DataServices dataServices = new DataServices();
 
         private string _temporalPass;
         private string setMail;
@@ -48,12 +48,12 @@ namespace Venar.WF
             {
                 if (txtNewPass.Text == newPassword)
                 {
-                    var conn = dataServices.OpenConnection();
+                    //var conn = dataServices.OpenConnection();
 
                     string query = "UPDATE Users SET Password = @Password,  UpdatedAt = getdate() WHERE mail = @setMail";
 
                     // Create a new SqlConnection and SqlCommand
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand(query))
                     {
                         // Add parameters to the command to prevent SQL injection
                         cmd.Parameters.AddWithValue("@Password", newPassword);

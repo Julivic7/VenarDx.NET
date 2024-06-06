@@ -34,7 +34,7 @@ namespace Venar.WF
         {
             string userName = txtUser.Text;
             string password = txtPassword.Text;
-           
+
             var userType = securityServices.VerifyLogin(userName, password);
 
             Debug.WriteLine(userType);
@@ -73,7 +73,7 @@ namespace Venar.WF
             txtPassword.Text = string.Empty;
             txtUser.Focus(); // Opcional: para poner el foco en el campo del usuario
         }
-      
+
 
         private void labelUser_Click(object sender, EventArgs e)
         {
@@ -81,12 +81,22 @@ namespace Venar.WF
 
         private void linkForgetPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+
             FrmForgetPassword frmForgetPassword = new FrmForgetPassword();
 
             frmForgetPassword.Show();
             this.Hide();
 
+        }
+
+        private void groupInicio_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

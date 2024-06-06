@@ -42,11 +42,14 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.BackgroundColor = Color.LightYellow;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Location = new Point(32, 55);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(634, 323);
+            dataGridView1.Size = new Size(885, 360);
             dataGridView1.TabIndex = 1;
             // 
             // userServicesBindingSource
@@ -59,13 +62,15 @@
             // 
             // FrmViewMedics
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(658, 347);
+            BackColor = Color.MediumAquamarine;
+            ClientSize = new Size(950, 463);
             Controls.Add(dataGridView1);
-            Margin = new Padding(3, 2, 3, 2);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrmViewMedics";
             Text = "FrmViewMedics";
+           // Load += FrmViewMedics_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)userServicesBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)userServicesBindingSource1).EndInit();

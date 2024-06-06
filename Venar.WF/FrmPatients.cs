@@ -14,53 +14,53 @@ namespace Venar.WF
         {
             InitializeComponent();
             userServices = new UserServices();
-            LoadPatients();
+           // LoadPatients();
         }
-        private void LoadPatients()
-        {
-            var patients = userServices.GetPatients();
+       // private void LoadPatients()
+        //{
+           // var patients = userServices.GetPatients();
 
-            dataGridView1.DataSource = patients;
+         //   dataGridView1.DataSource = patients;
 
-            dataGridView1.AutoGenerateColumns = false;
+           // dataGridView1.AutoGenerateColumns = false;
 
-            dataGridView1.Columns.Clear();
+            //dataGridView1.Columns.Clear();
 
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "Id",
-                HeaderText = "ID",
-                Visible = false
-            });
+            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            //{
+            //    DataPropertyName = "Id",
+              //  HeaderText = "ID",
+                //Visible = false
+            //});
 
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "nombre",
-                HeaderText = "Nombre"
-            });
+            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            //{
+              //  DataPropertyName = "nombre",
+                //HeaderText = "Nombre"
+           // });
 
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "apellido",
-                HeaderText = "Apellido"
-            });
+            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            //{
+              //  DataPropertyName = "apellido",
+               // HeaderText = "Apellido"
+            //});
 
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "dni",
-                HeaderText = "DNI"
-            });
+            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+          //  {
+            //    DataPropertyName = "dni",
+              //  HeaderText = "DNI"
+            //});
 
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "obraSocialPaciente",
-                HeaderText = "Obra Social"
-            });
-        }
+            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+            //{
+              //  DataPropertyName = "obraSocialPaciente",
+                //HeaderText = "Obra Social"
+            //});
+        
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            //if (e.RowIndex >= 0)
             {
                 DataGridViewRow clickedRow = dataGridView1.Rows[e.RowIndex];
 
