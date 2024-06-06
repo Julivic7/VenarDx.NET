@@ -71,9 +71,9 @@
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.White;
-            pictureBox2.BackgroundImage = Properties.Resources.window_close_icon_135015;
+            //pictureBox2.BackgroundImage = Properties.Resources.window_close_icon_135015;
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Image = Properties.Resources.window_close_icon_135015;
+            //pictureBox2.Image = Properties.Resources.window_close_icon_135015;
             pictureBox2.Location = new Point(997, 12);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(31, 30);
@@ -83,7 +83,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.unnamed_removebg_preview;
+            //pictureBox1.BackgroundImage = Properties.Resources.unnamed_removebg_preview;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(414, 93);
             pictureBox1.Name = "pictureBox1";

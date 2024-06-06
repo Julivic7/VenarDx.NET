@@ -17,7 +17,7 @@ namespace Venar.WF
    
     public partial class FrmForgetPassword : Form
     {
-        SecurityServices securityServices = new SecurityServices();
+        LoginSVC securityServices = new LoginSVC();
         MailData mailData = new MailData();
         MailService mailService = new MailService();
 

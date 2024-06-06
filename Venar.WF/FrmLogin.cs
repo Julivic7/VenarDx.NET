@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using Venar.SVC;
+using Venar.DTO;
 
 namespace Venar.WF
 {
     public partial class FrmLogin : Form
     {
-        private SecurityServices securityServices;
+        private LoginSVC loginSVC;
 
         public FrmLogin()
         {
             InitializeComponent();
-            securityServices = new SecurityServices();
+            loginSVC = new LoginSVC();
         }
 
         //Modificado por mi
@@ -35,20 +36,20 @@ namespace Venar.WF
             string userName = txtUser.Text;
             string password = txtPassword.Text;
 
-            var userType = securityServices.VerifyLogin(userName, password);
-
-            Debug.WriteLine(userType);
+            var userType = loginSVC.VerifyLogin(userName, password);
 
             if (userType != null)
             {
-                switch (userType)
+                // El login se realizo con exito
+                var type = loginSVC.RedirectUser(userType);
+                switch (type)
                 {
-                    case "ADMINISTRADOR":
+                    case "admin":
                         FrmMenuAdmin frmMenuAdmin = new FrmMenuAdmin(userName);
                         frmMenuAdmin.Show();
                         this.Hide();
                         break;
-                    case "MEDICO":
+                    case "medic":
                         FrmMenuMedic frmMenuMedic = new FrmMenuMedic();
                         frmMenuMedic.Show();
                         this.Hide();
@@ -58,12 +59,13 @@ namespace Venar.WF
                         ResetLoginFields();
                         break;
                 }
+                
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrecto");
-                ResetLoginFields();
-            }
+                // Mostrar los errores de validación
+                MessageBox.Show("Error de validación");
+            }           
 
         }
 
@@ -83,7 +85,6 @@ namespace Venar.WF
         {
 
             FrmForgetPassword frmForgetPassword = new FrmForgetPassword();
-
             frmForgetPassword.Show();
             this.Hide();
 

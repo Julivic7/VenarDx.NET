@@ -54,8 +54,8 @@ namespace Venar.WF
 
         private void btnShowMedic_Click(object sender, EventArgs e)
         {
-            List<Medic> medics = userServices.GetMedics();
-           openFormPanel(new FrmViewMedics(medics));
+           // List<Medic> medics = userServices.GetMedics();
+           //openFormPanel(new FrmViewMedics(medics));
         }
 
 

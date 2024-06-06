@@ -10,7 +10,7 @@ namespace Venar.DTO
     public class ResultDto
     {
         public List<string> Errors { get; set; } = new List<string>();
-        public UserDto UserDto { get; set; }
+        public MedicDto MedicDto { get; set; }
 
         public bool IsSuccess
         {

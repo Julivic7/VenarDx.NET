@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Venar.DTO;
 using Venar.Entities;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
@@ -6,9 +7,9 @@ namespace Venar.WF
 {
     public partial class FrmViewMedics : Form
     {
-        private List<Medic> medics;
+        private List<MedicDto> medics;
 
-        public FrmViewMedics(List<Medic> medics)
+        public FrmViewMedics(List<MedicDto> medics)
         {
             InitializeComponent();
             this.medics = medics;
@@ -35,13 +36,11 @@ namespace Venar.WF
             foreach (var medic in medics)
             {
                 dataGridView1.Rows.Add(
-                    medic.userName,
-                    medic.name,
-                    medic.lastName,
-                    medic.dni,
-                    medic.mail,
-                    medic.speciality,
-                    medic.medicalRegistration
+                    medic.UserName,
+                    medic.Name,
+                    medic.LastName,                   
+                    medic.Mail,
+                    medic.Specialty
                 );
             }
         }
