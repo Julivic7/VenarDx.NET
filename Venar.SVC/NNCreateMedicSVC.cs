@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Venar.SVC
 {
-    internal class Program
+    public class NNCreateMedicSVC
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
     }
 }

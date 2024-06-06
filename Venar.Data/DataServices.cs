@@ -14,7 +14,7 @@ using Venar.Entities;
 
 
 
-namespace Venar.SVC
+namespace Venar.Data
 {  
 
     public class DataServices
@@ -51,6 +51,8 @@ namespace Venar.SVC
             return command.ExecuteReader();
         }
     }
+
+
 }
 
 

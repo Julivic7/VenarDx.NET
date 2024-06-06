@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Venar.Entities
 {
-    internal class MedicalOrder
+    public class MedicalOrder
     {
     }
 }

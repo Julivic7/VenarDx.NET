@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Venar.DTO;
 using Venar.SVC;
 
 namespace Venar.WF
@@ -16,6 +17,7 @@ namespace Venar.WF
     {
         UserServices userServices = new UserServices();
         SecurityServices securityServices = new SecurityServices();
+        UserDto userDto = new UserDto();
 
         public FrmCreateMedic()
         {
