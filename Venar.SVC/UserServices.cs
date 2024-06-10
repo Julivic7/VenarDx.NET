@@ -26,57 +26,7 @@ namespace Venar.SVC
         //hacer private
         
 
-        public void CreatePatient(string name, string lastName, string dni, DateTime dateofBirth, string gender,
-          string location, string medicalCoverage)
-        {
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO patients(name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@DateOfBirth", dateofBirth);
-                cmd.Parameters.AddWithValue("@Gender", gender);
-                cmd.Parameters.AddWithValue("@Location", location);
-                cmd.Parameters.AddWithValue("@MedicalCoverage", medicalCoverage);
-
-                cmd.ExecuteNonQuery();
-
-
-            }
-        }
-
-        public List<Patient> GetPatients()
-        {
-            var patients = new List<Patient>();
-
-            string query = "SELECT PatientsId, Name, LastName, Dni, MedicalCoverage FROM Patients";
-
-            var conn = dataService.OpenConnection();
-
-
-            SqlCommand command = new SqlCommand(query, conn);
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                var patient = new Patient
-                {
-                    Id = reader.GetGuid(0),
-                    nombre = reader.GetString(1),
-                    apellido = reader.GetString(2),
-                    dni = reader.GetString(3),
-                    obraSocialPaciente = reader.GetString(4)
-                };
-                patients.Add(patient);
-            }
-            return patients;
-        }
-
+      
 
         //public string GetMedicsInfo()
         //{

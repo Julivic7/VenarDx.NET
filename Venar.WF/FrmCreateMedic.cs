@@ -52,24 +52,29 @@ namespace Venar.WF
                 Specialty = txtSpecialty.Text.Trim(),
                 MedicalRegistration = txtMedicalRegistration.Text.Trim()
             };                        
-            
+            //VERIFICAR TAMBIEN QUE NO HAYA OTRO MAIL IGUAL EN LA BASE DE DATOS
             var isValidMail = validCreateMedicSVC.IsValidEmail(txtMail.Text.Trim());
+            if(isValidMail != false)
+            {
+                ResultDto result = validCreateMedicSVC.CreateReallyUser(medicDto);
+                if (result.IsSuccess)
+                {
+                    // El médico fue creado con éxito, cerrar el formulario
+                    MessageBox.Show("El médico ha sido registrado con éxito.");
+                    this.Close();
+                }
+                else
+                {
+                    // Mostrar los errores de validación
+                    string errorMessage = string.Join("\n", result.Errors);
+                    MessageBox.Show(errorMessage, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
-            ResultDto result = validCreateMedicSVC.CreateReallyUser(medicDto);
+            
 
             // Verificar si la validación fue exitosa
-            if (result.IsSuccess)
-            {
-                // El médico fue creado con éxito, cerrar el formulario
-                MessageBox.Show("El médico ha sido registrado con éxito.");
-                this.Close();
-            }
-            else
-            {
-                // Mostrar los errores de validación
-                string errorMessage = string.Join("\n", result.Errors);
-                MessageBox.Show(errorMessage, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }                    
+                               
             
         }
 

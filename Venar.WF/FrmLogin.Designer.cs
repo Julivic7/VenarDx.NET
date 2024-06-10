@@ -71,9 +71,7 @@
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.White;
-            //pictureBox2.BackgroundImage = Properties.Resources.window_close_icon_135015;
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            //pictureBox2.Image = Properties.Resources.window_close_icon_135015;
             pictureBox2.Location = new Point(997, 12);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(31, 30);
@@ -83,7 +81,6 @@
             // 
             // pictureBox1
             // 
-            //pictureBox1.BackgroundImage = Properties.Resources.unnamed_removebg_preview;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(414, 93);
             pictureBox1.Name = "pictureBox1";
@@ -97,7 +94,7 @@
             btnLogin.BackgroundImage = Properties.Resources.acceso;
             btnLogin.BackgroundImageLayout = ImageLayout.Stretch;
             btnLogin.Cursor = Cursors.Hand;
-            btnLogin.Location = new Point(440, 449);
+            btnLogin.Location = new Point(519, 449);
             btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
             btnLogin.RightToLeft = RightToLeft.Yes;
@@ -112,7 +109,7 @@
             linkForgetPassword.BackColor = Color.Transparent;
             linkForgetPassword.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             linkForgetPassword.LinkColor = Color.Black;
-            linkForgetPassword.Location = new Point(400, 506);
+            linkForgetPassword.Location = new Point(231, 477);
             linkForgetPassword.Name = "linkForgetPassword";
             linkForgetPassword.Size = new Size(189, 25);
             linkForgetPassword.TabIndex = 7;
@@ -122,7 +119,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(368, 414);
+            txtPassword.Location = new Point(378, 372);
             txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(267, 27);
@@ -131,7 +128,7 @@
             // txtUser
             // 
             txtUser.BackColor = Color.LightCyan;
-            txtUser.Location = new Point(368, 309);
+            txtUser.Location = new Point(378, 309);
             txtUser.Margin = new Padding(3, 4, 3, 4);
             txtUser.Name = "txtUser";
             txtUser.Size = new Size(267, 27);
@@ -142,7 +139,7 @@
             labelPassword.AutoSize = true;
             labelPassword.BackColor = SystemColors.ButtonFace;
             labelPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelPassword.Location = new Point(452, 367);
+            labelPassword.Location = new Point(231, 372);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new Size(114, 28);
             labelPassword.TabIndex = 2;
@@ -154,7 +151,7 @@
             labelUser.BackColor = Color.LightCyan;
             labelUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelUser.ForeColor = SystemColors.ActiveCaptionText;
-            labelUser.Location = new Point(467, 262);
+            labelUser.Location = new Point(231, 305);
             labelUser.Name = "labelUser";
             labelUser.Size = new Size(83, 28);
             labelUser.TabIndex = 1;
@@ -166,7 +163,7 @@
             labelWelcome.AutoSize = true;
             labelWelcome.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
             labelWelcome.ForeColor = SystemColors.ButtonHighlight;
-            labelWelcome.Location = new Point(429, 204);
+            labelWelcome.Location = new Point(423, 227);
             labelWelcome.Name = "labelWelcome";
             labelWelcome.Size = new Size(160, 37);
             labelWelcome.TabIndex = 0;

@@ -39,22 +39,13 @@ namespace Venar.SVC
             using (var transaction = conn.BeginTransaction())
             {
                 try
-                {
-                    // Insertar en la tabla Users
-                    string userQuery = "INSERT INTO Users (UserName, Password, UserType, Email) OUTPUT INSERTED.UserId VALUES (@UserName, @Password, 'MEDIC', @Mail)";
-                    
-                    using (SqlCommand cmd = new SqlCommand(userQuery, conn, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@UserName", medicDto.UserName);
-                        cmd.Parameters.AddWithValue("@Password", medicDto.Password);
-                        cmd.Parameters.AddWithValue("@Mail", medicDto.Mail);
-                    }
+                {                 
 
                     // Insertar en la tabla Medics
-                    string medicQuery = "INSERT INTO Medics (UserId, Name, LastName, Dni, Mail, Specialty, MedicalRegistration) VALUES (@MedicId, @Name, @LastName, @Dni, @Mail, @Specialty, @MedicalRegistration)";
+                    string medicQuery = "INSERT INTO Medics (Name, LastName, Dni, Mail, Specialty, MedicalRegistration) VALUES (@Name, @LastName, @Dni, @Mail, @Specialty, @MedicalRegistration)";
                     using (SqlCommand cmd = new SqlCommand(medicQuery, conn, transaction))
                     {
-                        cmd.Parameters.AddWithValue("@MedicId", medicDto.Id);
+                        //cmd.Parameters.AddWithValue("@MedicId", medicDto.Id);
                         cmd.Parameters.AddWithValue("@Name", medicDto.Name);
                         cmd.Parameters.AddWithValue("@LastName", medicDto.LastName);
                         cmd.Parameters.AddWithValue("@Dni", medicDto.Dni);
@@ -62,6 +53,17 @@ namespace Venar.SVC
                         cmd.Parameters.AddWithValue("@Specialty", medicDto.Specialty);
                         cmd.Parameters.AddWithValue("@MedicalRegistration", medicDto.MedicalRegistration);
                         cmd.ExecuteNonQuery();
+                    }
+
+                    // Insertar en la tabla Users
+                    string userQuery = "INSERT INTO Users (UserName, Password, UserType, Email)  VALUES (@UserName, @Password, 'MEDIC', @Mail)";
+
+                    using (SqlCommand cmd = new SqlCommand(userQuery, conn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", medicDto.Id);
+                        cmd.Parameters.AddWithValue("@UserName", medicDto.UserName);
+                        cmd.Parameters.AddWithValue("@Password", medicDto.Password);
+                        cmd.Parameters.AddWithValue("@Mail", medicDto.Mail);
                     }
 
                     transaction.Commit();

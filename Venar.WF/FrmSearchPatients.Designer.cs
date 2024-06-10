@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtBxNameSearch = new TextBox();
+            txtBxDniSearch = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -48,12 +48,12 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // txtBxNameSearch
+            // txtBxDniSearch
             // 
-            txtBxNameSearch.Location = new Point(276, 50);
-            txtBxNameSearch.Name = "txtBxNameSearch";
-            txtBxNameSearch.Size = new Size(225, 27);
-            txtBxNameSearch.TabIndex = 0;
+            txtBxDniSearch.Location = new Point(276, 50);
+            txtBxDniSearch.Name = "txtBxDniSearch";
+            txtBxDniSearch.Size = new Size(225, 27);
+            txtBxDniSearch.TabIndex = 0;
             // 
             // label1
             // 
@@ -127,6 +127,7 @@
             btnModifyPatient.Size = new Size(150, 40);
             btnModifyPatient.TabIndex = 13;
             btnModifyPatient.UseVisualStyleBackColor = false;
+            btnModifyPatient.Click += btnModifyPatient_Click;
             // 
             // label5
             // 
@@ -209,6 +210,7 @@
             button2.TabIndex = 24;
             button2.Text = "SEARCH";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // dataGridView1
             // 
@@ -242,7 +244,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtBxNameSearch);
+            Controls.Add(txtBxDniSearch);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmViewPatients";
             Text = "viewPatients";
@@ -253,7 +255,7 @@
 
         #endregion
 
-        private TextBox txtBxNameSearch;
+        private TextBox txtBxDniSearch;
         private Label label1;
         private Label label2;
         private Label label3;

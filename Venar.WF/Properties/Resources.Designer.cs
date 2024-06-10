@@ -303,6 +303,16 @@ namespace Venar.WF.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap unnamed_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("unnamed-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ver {
             get {
                 object obj = ResourceManager.GetObject("ver", resourceCulture);

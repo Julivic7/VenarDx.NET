@@ -23,7 +23,7 @@ namespace Venar.WF
         {
             InitializeComponent();
             LoggedUserName = userName ?? "usuario";
-            label1.Text = "Bienvenido " + LoggedUserName;
+            labelAdmin.Text = "Bienvenido " + LoggedUserName;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -54,8 +54,8 @@ namespace Venar.WF
 
         private void btnShowMedic_Click(object sender, EventArgs e)
         {
-           // List<Medic> medics = userServices.GetMedics();
-           //openFormPanel(new FrmViewMedics(medics));
+            // List<Medic> medics = userServices.GetMedics();
+            //openFormPanel(new FrmViewMedics(medics));
         }
 
 
@@ -70,5 +70,7 @@ namespace Venar.WF
             frmLogin.Show();
             this.Hide();
         }
+
+       
     }
 }

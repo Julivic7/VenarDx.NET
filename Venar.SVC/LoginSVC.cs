@@ -17,6 +17,7 @@ namespace Venar.SVC
         public User VerifyLogin(string userName, string password)
         {
             string userType = null;
+            
 
             var conn = dataService.OpenConnection();
 
@@ -43,7 +44,7 @@ namespace Venar.SVC
                     }
                     else
                     {
-                        throw new Exception("Invalid login credentials.");
+                        return null;
                     }
                 }
             }

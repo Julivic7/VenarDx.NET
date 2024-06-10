@@ -45,6 +45,8 @@
             label3 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
+            label9 = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -97,6 +99,7 @@
             btnRegistar.TabIndex = 20;
             btnRegistar.Text = "REGISTRAR";
             btnRegistar.UseVisualStyleBackColor = true;
+            btnRegistar.Click += btnRegistar_Click_1;
             // 
             // txtMCovPat
             // 
@@ -109,7 +112,7 @@
             // txtLocaPat
             // 
             txtLocaPat.BackColor = Color.WhiteSmoke;
-            txtLocaPat.Location = new Point(704, 196);
+            txtLocaPat.Location = new Point(694, 201);
             txtLocaPat.Name = "txtLocaPat";
             txtLocaPat.Size = new Size(288, 27);
             txtLocaPat.TabIndex = 18;
@@ -212,13 +215,34 @@
             // 
             // pictureBox1
             // 
-            //pictureBox1.Image = Properties.Resources.unnamed_removebg_preview;
+            pictureBox1.BackgroundImage = Properties.Resources.unnamed_removebg_preview;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(465, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(132, 81);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Tempus Sans ITC", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(710, 163);
+            label9.Name = "label9";
+            label9.Size = new Size(177, 17);
+            label9.TabIndex = 26;
+            label9.Text = "INGRESE 1 PARA FEMENINO";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Tempus Sans ITC", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(710, 180);
+            label10.Name = "label10";
+            label10.Size = new Size(186, 17);
+            label10.TabIndex = 27;
+            label10.Text = "INGRESE 2 PARA MASCULINO";
             // 
             // FrmCreatePatient
             // 
@@ -227,6 +251,8 @@
             BackColor = Color.MediumAquamarine;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1036, 396);
+            Controls.Add(label10);
+            Controls.Add(label9);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
@@ -271,5 +297,7 @@
         private Label label3;
         private Label label2;
         private PictureBox pictureBox1;
+        private Label label9;
+        private Label label10;
     }
 }
