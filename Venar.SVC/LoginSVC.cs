@@ -6,55 +6,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Venar.Data;
+using Venar.Entities;
 
 namespace Venar.SVC
 {
-    public class SecurityServices
+    public class LoginSVC
     {
         DataServices dataService = new DataServices();
 
-        public string VerifyLogin(string userName, string password)
+        public User VerifyLogin(string userName, string password)
         {
             string userType = null;
+            
 
             var conn = dataService.OpenConnection();
 
 
             // Write the SQL query to validate the user
-            string query = "SELECT UserType FROM Users WHERE Username = @Username AND Password = @Password";
-
-            // Create a command object
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            string query = "SELECT UserId, UserName, UserType FROM Users WHERE UserName = @UserName AND Password = @Password";
+            using (var cmd = new SqlCommand(query, conn))
             {
-                // Add parameters to the SQL query
-                cmd.Parameters.AddWithValue("@username", userName);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@UserName", userName);
+                cmd.Parameters.AddWithValue("@Password", password);
 
-                try
+                using (var reader = cmd.ExecuteReader())
                 {
-
-                    var result = cmd.ExecuteScalar();
-
-                    // Verificamos si se obtuvo algún resultado
-                    if (result != null)
+                    if (reader.Read())
                     {
-                        userType = result.ToString(); // Asignamos el tipo de usuario obtenido de la consulta
-                        Debug.WriteLine("Login successful. User type: " + userType);
+                        var user = new User
+                        {
+                            UserId = reader.GetInt32(0),
+                            UserName = reader.GetString(1),
+                            UserType = reader.GetString(2)
+                        };
+
+                        return user;
                     }
                     else
                     {
-                        Debug.WriteLine("User doesn't exist");
+                        return null;
                     }
-
-
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Error while validating login: " + ex.Message);
-                }
-                return userType;
             }
 
+        }                
+        public string RedirectUser(User user)
+        {
+            if (user.UserType == "ADMIN")
+            {
+                return "admin";
+            }
+            else if (user.UserType == "MEDIC")
+            {
+                return "medic";
+            }
+            else 
+            {
+                return null;
+            }
         }
         public bool VerifyMail(string mail)
         {
@@ -96,24 +105,8 @@ namespace Venar.SVC
 
             return loginSuccessful;
         }
-        public string TemporalPassword()
-        {
-            var clave = new Random().Next().ToString();
-
-            return clave;
-        }
-        public bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+     
+        
 
     }
 }

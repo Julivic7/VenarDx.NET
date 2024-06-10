@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             textBox1 = new TextBox();
-            txtSpeciality = new TextBox();
+            txtSpecialty = new TextBox();
             txtMedicalRegistration = new Label();
             label6 = new Label();
             txtUserName = new TextBox();
@@ -45,8 +45,6 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -57,13 +55,13 @@
             textBox1.Size = new Size(303, 27);
             textBox1.TabIndex = 23;
             // 
-            // txtSpeciality
+            // txtSpecialty
             // 
-            txtSpeciality.Location = new Point(464, 133);
-            txtSpeciality.Margin = new Padding(3, 4, 3, 4);
-            txtSpeciality.Name = "txtSpeciality";
-            txtSpeciality.Size = new Size(303, 27);
-            txtSpeciality.TabIndex = 22;
+            txtSpecialty.Location = new Point(464, 133);
+            txtSpecialty.Margin = new Padding(3, 4, 3, 4);
+            txtSpecialty.Name = "txtSpecialty";
+            txtSpecialty.Size = new Size(303, 27);
+            txtSpecialty.TabIndex = 22;
             // 
             // txtMedicalRegistration
             // 
@@ -107,7 +105,7 @@
             // 
             btnRegister.BackColor = Color.MediumAquamarine;
             btnRegister.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnRegister.Location = new Point(322, 453);
+            btnRegister.Location = new Point(580, 459);
             btnRegister.Margin = new Padding(3, 4, 3, 4);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(187, 36);
@@ -206,23 +204,12 @@
             label2.TabIndex = 1;
             label2.Text = "Apellido :";
             // 
-            // pictureBox1
-            // 
-            //pictureBox1.Image = Properties.Resources.;
-            pictureBox1.Location = new Point(340, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(156, 98);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 24;
-            pictureBox1.TabStop = false;
-            // 
             // FrmCreateMedic
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MediumAquamarine;
             ClientSize = new Size(882, 547);
-            Controls.Add(pictureBox1);
             Controls.Add(txtPassword);
             Controls.Add(btnRegister);
             Controls.Add(txtUserName);
@@ -231,7 +218,7 @@
             Controls.Add(label1);
             Controls.Add(txtName);
             Controls.Add(txtMedicalRegistration);
-            Controls.Add(txtSpeciality);
+            Controls.Add(txtSpecialty);
             Controls.Add(label8);
             Controls.Add(txtLastName);
             Controls.Add(label6);
@@ -244,7 +231,6 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCreateMedic";
             Text = "FrmSignUp";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -264,9 +250,8 @@
         private TextBox txtUserName;
         private Label label1;
         private TextBox textBox1;
-        private TextBox txtSpeciality;
+        private TextBox txtSpecialty;
         private Label txtMedicalRegistration;
         private Label label6;
-        private PictureBox pictureBox1;
     }
 }

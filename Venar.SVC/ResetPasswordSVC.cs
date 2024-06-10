@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Venar.Data;
+using Venar.DTO;
 using Xceed.Wpf.Toolkit;
 
 namespace Venar.SVC
@@ -14,41 +15,45 @@ namespace Venar.SVC
 
         DataServices dataServices = new DataServices();
 
-        public string ResetPass(string temporal, string password, string newPassword, string newPasswordConfirm, string setMail)
+        public ResultDto ResetPass(ResetPassDto resetPassDto)
         {
-            
-            if (password == temporal)
+            var result = new ResultDto();
+
+            if (resetPassDto.Temporal != resetPassDto.Password)
             {
-                if (newPassword == newPasswordConfirm)
-                {
-                    var conn = dataServices.OpenConnection();
-
-                    string query = "UPDATE Users SET Password = @Password,  UpdatedAt = getdate() WHERE mail = @setMail";
-
-                    // Create a new SqlConnection and SqlCommand
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Add parameters to the command to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@Password", newPassword);
-                        cmd.Parameters.AddWithValue("@setMail", setMail);
-
-                        // Execute the command
-                        cmd.ExecuteNonQuery();
-                    }
-                    string message1 = "Contraseña actualizada correctamente.";
-
-                    return message1;
-                }
-                else
-                {
-                    return  "Las nuevas contraseñas no coinciden.";
-                }
+                result.Errors.Add("La contraseña temporal es incorrecta.");
+                return result;
             }
-            else
+
+            if (resetPassDto.NewPassword != resetPassDto.NewPasswordConfirm)
             {
-                return "La contraseña temporal es incorrecta.";
+                result.Errors.Add("Las nuevas contraseñas no coinciden.");
+                return result;
             }
-            return "";
+
+            var conn = dataServices.OpenConnection();
+            try
+            {
+                string query = "UPDATE Users SET Password = @Password, UpdatedAt = GETDATE() WHERE Mail = @Mail";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Password", resetPassDto.NewPassword);
+                    cmd.Parameters.AddWithValue("@Mail", resetPassDto.SetMail);
+                    cmd.ExecuteNonQuery();
+                }
+
+                result.MedicDto = null;  // You can set any relevant data here
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add($"Error al actualizar la contraseña: {ex.Message}");
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
         }
     }
 }

@@ -24,39 +24,14 @@ namespace Venar.SVC
             users = new List<User>();
         }
         //hacer private
-        public void CreateMedic(string userName, string name, string lastName, string dni, string mail, string password, string speciality, string medicalRegistration)
-        {
-            Debug.WriteLine(userName);
-
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO Medics (username, name, lastName, dni , mail, password, speciality , medicalRegistration) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password, @Speciality, @MedicalRegistration)";
-
-            // Create a new SqlConnection and SqlCommand
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                // Add parameters to the command to prevent SQL injection
-                cmd.Parameters.AddWithValue("@UserName", userName);
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@Mail", mail);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Speciality", speciality);
-                cmd.Parameters.AddWithValue("@MedicalRegistration", medicalRegistration);
-
-                // Execute the command
-                cmd.ExecuteNonQuery();
-            }
-
-        }
+        
 
         public void CreatePatient(string name, string lastName, string dni, DateTime dateofBirth, string gender,
           string location, string medicalCoverage)
         {
             var conn = dataService.OpenConnection();
 
-            string query = "INSERT INTO patients(name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
+            string query = "INSERT INTO Patients (name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
 
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
@@ -125,11 +100,11 @@ namespace Venar.SVC
         //    return consolidatedInfo;
         //}
 
-        public List<Medic> GetMedics()
+        public List<MedicDto> GetMedics()
         {
-            var medics = new List<Medic>();
+            var medics = new List<MedicDto>();
 
-            string query = "SELECT userName, Name, LastName, Dni, Mail, Password, Speciality, MedicalRegistration FROM Medics";
+            string query = "SELECT userName, Name, LastName, Dni, Mail, Password, Specialty, MedicalRegistration FROM Medics";
 
             using (var conn = dataService.OpenConnection())
             {
@@ -139,18 +114,18 @@ namespace Venar.SVC
                     {
                         while (reader.Read())
                         {
-                            var medic = new Medic
+                            var medicDto = new MedicDto
                             {
-                                userName = reader.GetString(0),
-                                name = reader.GetString(1),
-                                lastName = reader.GetString(2),
-                                dni = reader.GetString(3),
-                                mail = reader.GetString(4),
-                                password = reader.GetString(5),
-                                speciality = reader.GetString(6),
-                                medicalRegistration = reader.GetString(7)
+                                UserName = reader.GetString(0),
+                                Name = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dni = reader.GetString(3),
+                                Mail = reader.GetString(4),
+                                Password = reader.GetString(5),
+                                Specialty = reader.GetString(6),
+                                MedicalRegistration = reader.GetString(7)
                             };
-                            medics.Add(medic);
+                            medics.Add(medicDto);
                         }
                     }
                 }
@@ -229,8 +204,6 @@ namespace Venar.SVC
             return diagnostic;
         }
 
-
-
         public int GetSymptomIdByName(string symptomName)
         {
             var conn = dataService.OpenConnection();
@@ -264,87 +237,8 @@ namespace Venar.SVC
             return symptomId;
         }
 
-        //BORRAR======================================================
-        private void CreateUser(UserDto userDto)
-        {           
-
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO Users (username, name, lastName, dni , mail, password) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password)";
-
-            // Create a new SqlConnection and SqlCommand
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                // Add parameters to the command to prevent SQL injection
-                cmd.Parameters.AddWithValue("@UserName", userDto.UserName);
-                cmd.Parameters.AddWithValue("@Name", userDto.Name);
-                cmd.Parameters.AddWithValue("@LastName", userDto.LastName);
-                cmd.Parameters.AddWithValue("@Dni", userDto.Dni);
-                cmd.Parameters.AddWithValue("@Mail", userDto.Mail);
-                cmd.Parameters.AddWithValue("@Password", userDto.Password);
-                //cmd.Parameters.AddWithValue("@UserType", userDto.UserType);
-
-                // Execute the command
-                cmd.ExecuteNonQuery();
-            }
-          
-        }
-        //BORRAR======================================================
-
-        //CORREGIR Y ORDENAR
-        private void ValidatedUser(ResultDto result, UserDto obj)
-        {
-            if (string.IsNullOrEmpty(obj.Name))
-            {
-                result.Errors.Add("El Nombre es obligatorio.");
-            }
-            else if (string.IsNullOrEmpty(obj.Mail))
-            {
-                result.Errors.Add("El E-mail es obligatorio.");
-            }
-            else if (string.IsNullOrEmpty(obj.Password))
-            {
-                result.Errors.Add("Debe ingresar una contraseña.");
-            }
-            else if (string.IsNullOrEmpty(obj.UserName))
-            {
-                result.Errors.Add("Debe ingresar el nombre de Usuario.");
-            }
-            else if (string.IsNullOrEmpty(obj.LastName))
-            {
-                result.Errors.Add("Debe ingresar el nombre de Usuario.");
-            }
-            else if (string.IsNullOrEmpty(obj.Dni))
-            {
-                result.Errors.Add("Debe ingresar el DNI.");
-            }
-       
-            
-        }
-
-        public ResultDto CreateReallyUser(UserDto obj)
-        {           
-            try
-            {
-                var resultDto = new ResultDto();
-
-                ValidatedUser(resultDto, obj);
-
-                if(resultDto.IsSuccess)
-                {
-                    CreateUser(obj);
-                }
-                return resultDto;
-
-            }
-
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-             
-        }
+         
+        
 
 
 

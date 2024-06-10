@@ -36,7 +36,6 @@ namespace Venar.WF
             this.WindowState = FormWindowState.Minimized;
         }
 
-
         private void button4_Click(object sender, EventArgs e)
         {
 
@@ -73,6 +72,7 @@ namespace Venar.WF
         {
 
         }
+    
     }
 }
      
