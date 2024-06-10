@@ -17,6 +17,7 @@ namespace Venar.SVC
         public User VerifyLogin(string userName, string password)
         {
             string userType = null;
+            
 
             var conn = dataService.OpenConnection();
 
@@ -43,56 +44,12 @@ namespace Venar.SVC
                     }
                     else
                     {
-                        throw new Exception("Invalid login credentials.");
+                        return null;
                     }
                 }
             }
 
-        }
-
-        //public string VerifyLoginMedic(string userName, string password)
-        //{
-        //    string userType = null;
-
-        //    var conn = dataService.OpenConnection();
-        //    // Write the SQL query to validate the user
-        //    string query = "SELECT * FROM Medics WHERE Username = @Username AND Password = @Password";
-
-        //    // Create a command object
-        //    using (SqlCommand cmd = new SqlCommand(query, conn))
-        //    {
-        //        // Add parameters to the SQL query
-        //        cmd.Parameters.AddWithValue("@username", userName);
-        //        cmd.Parameters.AddWithValue("@password", password);
-
-        //        try
-        //        {
-        //            var result = cmd.ExecuteScalar();
-
-        //            // Verificamos si se obtuvo algún resultado
-        //            if (result != null)
-        //            {
-        //                userType = result.ToString(); // Asignamos el tipo de usuario obtenido de la consulta
-
-        //            }
-        //            else
-        //            {
-        //                Debug.WriteLine("User doesn't exist");
-        //            }
-
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Debug.WriteLine("Error while validating login: " + ex.Message);
-        //        }
-        //        return userType;
-        //    }
-
-        //}
-
-        //VERIFIVAR REDISTRIBUCION o ELIMINACION DE LOS SIGUIENTES METODOS
-
+        }                
         public string RedirectUser(User user)
         {
             if (user.UserType == "ADMIN")
@@ -108,7 +65,6 @@ namespace Venar.SVC
                 return null;
             }
         }
-
         public bool VerifyMail(string mail)
         {
             bool loginSuccessful = false;
@@ -149,12 +105,7 @@ namespace Venar.SVC
 
             return loginSuccessful;
         }
-        public string TemporalPassword()
-        {
-            var clave = new Random().Next().ToString();
-
-            return clave;
-        }
+     
         
 
     }

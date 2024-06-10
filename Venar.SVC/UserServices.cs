@@ -31,7 +31,7 @@ namespace Venar.SVC
         {
             var conn = dataService.OpenConnection();
 
-            string query = "INSERT INTO patients(name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
+            string query = "INSERT INTO Patients (name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
 
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
@@ -237,12 +237,7 @@ namespace Venar.SVC
             return symptomId;
         }
 
-        //BORRAR======================================================
-        
-        //BORRAR======================================================
-
-        //CORREGIR Y ORDENAR
-        
+         
         
 
 

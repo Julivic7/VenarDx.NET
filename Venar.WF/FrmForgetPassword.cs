@@ -20,6 +20,7 @@ namespace Venar.WF
         LoginSVC securityServices = new LoginSVC();
         MailData mailData = new MailData();
         MailService mailService = new MailService();
+        ForgetPasswordSVC forgetPasswordSVC = new ForgetPasswordSVC();
 
         public FrmForgetPassword()
         {
@@ -36,31 +37,26 @@ namespace Venar.WF
         {
 
             var mail = txtMail.Text;
+            var result = forgetPasswordSVC.HandleForgotPassword(mail);
 
-            bool loginSuccessful = securityServices.VerifyMail(mail);
-
-            Debug.WriteLine(loginSuccessful);
-
-            if (loginSuccessful)
+            if (result.IsSuccess)
             {
-                var temporalPass = securityServices.TemporalPassword();
-
-                mailData.MailTo = txtMail.Text;
-                mailData.Subject = "Registro en Venar";
-                mailData.Body = $"Hola aqui va tu clave temporal: {temporalPass}";
-
-                mailService.SendMail(mailData);
+                string temporalPass = result.MedicDto.Password;
 
                 MessageBox.Show("Revisa la casilla del mail: " + mail);
 
                 FrmResetPassword frmResetPassword = new FrmResetPassword(mail, temporalPass);
-
                 frmResetPassword.ShowDialog();
 
                 this.Hide();
             }
+            else
+            {
+                string errorMessage = string.Join(Environment.NewLine, result.Errors);
+                MessageBox.Show(errorMessage);
+            }
 
-           
+
         }
     }
 }
