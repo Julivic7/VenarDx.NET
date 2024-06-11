@@ -1,79 +1,81 @@
-﻿using Venar.Entities;
-using Venar.SVC;
-using System.Diagnostics;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Venar.SVC;
+using System.Windows.Forms;
+using Venar.Entities;
+
 
 namespace Venar.WF
 {
-    public partial class FrmPatients : Form
+    public partial class FrmCreatePatient : Form
     {
-        private UserServices userServices;
-
-        public FrmPatients()
+        UserServices userServices;
+        PatientsSVC patientsSVC;
+        public FrmCreatePatient()
         {
             InitializeComponent();
-            userServices = new UserServices();
-           // LoadPatients();
+            patientsSVC = new PatientsSVC();
         }
-       // private void LoadPatients()
-        //{
-           // var patients = userServices.GetPatients();
 
-         //   dataGridView1.DataSource = patients;
 
-           // dataGridView1.AutoGenerateColumns = false;
 
-            //dataGridView1.Columns.Clear();
 
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            //{
-            //    DataPropertyName = "Id",
-              //  HeaderText = "ID",
-                //Visible = false
-            //});
-
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            //{
-              //  DataPropertyName = "nombre",
-                //HeaderText = "Nombre"
-           // });
-
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            //{
-              //  DataPropertyName = "apellido",
-               // HeaderText = "Apellido"
-            //});
-
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-          //  {
-            //    DataPropertyName = "dni",
-              //  HeaderText = "DNI"
-            //});
-
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-            //{
-              //  DataPropertyName = "obraSocialPaciente",
-                //HeaderText = "Obra Social"
-            //});
-        
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
-            //if (e.RowIndex >= 0)
-            {
-                DataGridViewRow clickedRow = dataGridView1.Rows[e.RowIndex];
+            Application.Exit();
+        }
 
-                foreach (DataGridViewCell cell in clickedRow.Cells)
-                {
-                    Debug.WriteLine(dataGridView1.Columns[cell.ColumnIndex].HeaderText + ": " + cell.Value);
-                }
+        private void BtnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistar_Click_1(object sender, EventArgs e)
+        {
+            userServices = new UserServices();
+            string Name = txtNamePat.Text;
+            string LastName = txtLastNamePat.Text;
+            string Dni = txtDniPat.Text;
+            DateTime DataBirth = dateTimePicker1.Value;
+            string Gender = txtGenderPat.Text;
+            string Location = txtLocaPat.Text;
+            string Cover = txtMCovPat.Text;
+
+
+            if (short.TryParse(txtGenderPat.Text, out short gender))
+            {
+                patientsSVC.CreatePatient(Name, LastName, Dni, DataBirth, gender, Location, Cover);
+                MessageBox.Show("Paciente registrado exitosamente.");
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para el género.");
             }
         }
 
-
-        private void FrmPatients_Load(object sender, EventArgs e)
-        {
-        }
     }
 }
+
+
+
