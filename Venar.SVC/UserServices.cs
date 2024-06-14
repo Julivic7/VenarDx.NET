@@ -7,6 +7,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Venar.Entities;
 using System.Data;
+using Venar.Data;
+using Venar.DTO;
+
 
 namespace Venar.SVC
 {
@@ -14,90 +17,16 @@ namespace Venar.SVC
     {
         DataServices dataService = new DataServices();
         private List<User> users;
-
+         
         public UserServices()
         {
 
             users = new List<User>();
         }
-        public void CreateMedic(string userName, string name, string lastName, string dni, string mail, string password, string speciality, string medicalRegistration)
-        {
-            Debug.WriteLine(userName);
+        //hacer private
+        
 
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO Medics (username, name, lastName, dni , mail, password, speciality , medicalRegistration) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password, @Speciality, @MedicalRegistration)";
-
-            // Create a new SqlConnection and SqlCommand
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                // Add parameters to the command to prevent SQL injection
-                cmd.Parameters.AddWithValue("@UserName", userName);
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@Mail", mail);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Speciality", speciality);
-                cmd.Parameters.AddWithValue("@MedicalRegistration", medicalRegistration);
-
-                // Execute the command
-                cmd.ExecuteNonQuery();
-            }
-
-        }
-
-        public void CreatePatient(string name, string lastName, string dni, DateTime dateofBirth, string gender,
-          string location, string medicalCoverage)
-        {
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO patients(name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@DateOfBirth", dateofBirth);
-                cmd.Parameters.AddWithValue("@Gender", gender);
-                cmd.Parameters.AddWithValue("@Location", location);
-                cmd.Parameters.AddWithValue("@MedicalCoverage", medicalCoverage);
-
-                cmd.ExecuteNonQuery();
-
-
-            }
-        }
-
-        public List<Patient> GetPatients()
-        {
-            var patients = new List<Patient>();
-
-            string query = "SELECT PatientsId, Name, LastName, Dni, MedicalCoverage FROM Patients";
-
-            var conn = dataService.OpenConnection();
-
-
-            SqlCommand command = new SqlCommand(query, conn);
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                var patient = new Patient
-                {
-                    Id = reader.GetGuid(0),
-                    nombre = reader.GetString(1),
-                    apellido = reader.GetString(2),
-                    dni = reader.GetString(3),
-                    obraSocialPaciente = reader.GetString(4)
-                };
-                patients.Add(patient);
-            }
-            return patients;
-        }
-
+      
 
         //public string GetMedicsInfo()
         //{
@@ -121,11 +50,11 @@ namespace Venar.SVC
         //    return consolidatedInfo;
         //}
 
-        public List<Medic> GetMedics()
+        public List<MedicDto> GetMedics()
         {
-            var medics = new List<Medic>();
+            var medics = new List<MedicDto>();
 
-            string query = "SELECT userName, Name, LastName, Dni, Mail, Password, Speciality, MedicalRegistration FROM Medics";
+            string query = "SELECT userName, Name, LastName, Dni, Mail, Password, Specialty, MedicalRegistration FROM Medics";
 
             using (var conn = dataService.OpenConnection())
             {
@@ -135,18 +64,18 @@ namespace Venar.SVC
                     {
                         while (reader.Read())
                         {
-                            var medic = new Medic
+                            var medicDto = new MedicDto
                             {
-                                userName = reader.GetString(0),
-                                name = reader.GetString(1),
-                                lastName = reader.GetString(2),
-                                dni = reader.GetString(3),
-                                mail = reader.GetString(4),
-                                password = reader.GetString(5),
-                                speciality = reader.GetString(6),
-                                medicalRegistration = reader.GetString(7)
+                                UserName = reader.GetString(0),
+                                Name = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Dni = reader.GetString(3),
+                                Mail = reader.GetString(4),
+                                Password = reader.GetString(5),
+                                Specialty = reader.GetString(6),
+                                MedicalRegistration = reader.GetString(7)
                             };
-                            medics.Add(medic);
+                            medics.Add(medicDto);
                         }
                     }
                 }
@@ -225,8 +154,6 @@ namespace Venar.SVC
             return diagnostic;
         }
 
-
-
         public int GetSymptomIdByName(string symptomName)
         {
             var conn = dataService.OpenConnection();
@@ -261,32 +188,17 @@ namespace Venar.SVC
         }
 
         //BORRAR======================================================
-        public void CreateUser(string userName, string name, string lastName, string dni, string mail, string password, string userType)
-        {
-            Debug.WriteLine(userName);
-
-            var conn = dataService.OpenConnection();
-
-            string query = "INSERT INTO Users (username, name, lastName, dni , mail, password, userType) VALUES (@Username, @Name, @LastName, @Dni, @Mail, @Password, @UserType)";
-
-            // Create a new SqlConnection and SqlCommand
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                // Add parameters to the command to prevent SQL injection
-                cmd.Parameters.AddWithValue("@UserName", userName);
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@Mail", mail);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@UserType", userType);
-
-                // Execute the command
-                cmd.ExecuteNonQuery();
-            }
-          
-        }
+        
         //BORRAR======================================================
+
+        //CORREGIR Y ORDENAR
+        
+        
+
+
+
     }
 }
+
+
 

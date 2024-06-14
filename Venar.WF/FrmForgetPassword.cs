@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Venar.Entities;
 using Venar.SVC;
-using Ventar.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Venar.WF
@@ -18,7 +17,7 @@ namespace Venar.WF
    
     public partial class FrmForgetPassword : Form
     {
-        SecurityServices securityServices = new SecurityServices();
+        LoginSVC securityServices = new LoginSVC();
         MailData mailData = new MailData();
         MailService mailService = new MailService();
 

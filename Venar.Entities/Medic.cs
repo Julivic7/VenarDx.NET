@@ -8,8 +8,8 @@ namespace Venar.Entities
 {
     public class Medic : User { 
 
-        public string speciality { get; set; }
-        public string medicalRegistration { get; set; }
+        public string Speciality { get; set; }
+        public string MedicalRegistration { get; set; }
 
     }
 }

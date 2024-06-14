@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Venar.SVC;
 using System.Windows.Forms;
+using Venar.Entities;
 
 
 namespace Venar.WF
@@ -16,9 +17,11 @@ namespace Venar.WF
     public partial class FrmCreatePatient : Form
     {
         UserServices UserServices;
+        PatientsSVC patientsSVC;
         public FrmCreatePatient()
         {
             InitializeComponent();
+            patientsSVC = new PatientsSVC();
         }
 
 
@@ -34,15 +37,23 @@ namespace Venar.WF
             this.WindowState = FormWindowState.Minimized;
         }
 
-
         private void button4_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnRegistar_Click(object sender, EventArgs e)
+        
+
+        
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
-            UserServices = new UserServices();
+
+        }
+
+        private void btnRegistar_Click_1(object sender, EventArgs e)
+        {
+             UserServices = new UserServices();
             string Name = txtNamePat.Text;
             string LastName = txtLastNamePat.Text;
             string Dni = txtDniPat.Text;
@@ -52,24 +63,19 @@ namespace Venar.WF
             string Cover = txtMCovPat.Text;
 
 
-            UserServices.CreatePatient(Name, LastName, Dni, DataBirth, Gender, Location, Cover);
-            MessageBox.Show("Paciente registrado exitosamente.");
-
-            // if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Dni) ||
-            //     string.IsNullOrEmpty(DataBirth) || string.IsNullOrEmpty(Gender) ||string.IsNullOrEmpty(Location) || string.IsNullOrEmpty(Cover) )
-
-            //{
-            //  MessageBox.Show("Complete todos los campos");
-
-
-            //else
-            // {
-
+            if (short.TryParse(txtGenderPat.Text, out short gender))
+            {
+                patientsSVC.CreatePatient(Name, LastName, Dni, DataBirth, gender, Location, Cover);
+                MessageBox.Show("Paciente registrado exitosamente.");
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para el género.");
+            }
         }
 
-
-
     }
-}
+    }
+
      
 

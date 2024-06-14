@@ -23,7 +23,7 @@ namespace Venar.WF
         {
             InitializeComponent();
             LoggedUserName = userName ?? "usuario";
-            label1.Text = "Bienvenido " + LoggedUserName;
+            labelAdmin.Text = "Bienvenido " + LoggedUserName;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -35,19 +35,27 @@ namespace Venar.WF
         {
 
         }
-
+        private void openFormPanel(object formHijo)
+        {
+            if (this.panelContenedor.Controls.Count > 0)
+                this.panelContenedor.Controls.RemoveAt(0);
+            Form fh = formHijo as Form;
+            fh.TopLevel = false;
+            fh.Dock = DockStyle.Fill;
+            this.panelContenedor.Controls.Add(fh);
+            this.panelContenedor.Tag = fh;
+            fh.Show();
+        }
         private void btnCreateMedic_Click(object sender, EventArgs e)
         {
-            FrmCreateMedic frmCreateMedic = new FrmCreateMedic();
-            frmCreateMedic.Show();
+            openFormPanel(new FrmCreateMedic());
 
         }
 
         private void btnShowMedic_Click(object sender, EventArgs e)
         {
-            List<Medic> medics = userServices.GetMedics();
-            FrmViewMedics frmViewMedics = new FrmViewMedics(medics);
-            frmViewMedics.Show();
+            // List<Medic> medics = userServices.GetMedics();
+            //openFormPanel(new FrmViewMedics(medics));
         }
 
 
@@ -55,5 +63,14 @@ namespace Venar.WF
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmLogin frmLogin = new FrmLogin();
+            frmLogin.Show();
+            this.Hide();
+        }
+
+       
     }
 }

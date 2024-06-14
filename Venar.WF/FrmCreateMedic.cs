@@ -8,14 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Venar.DTO;
 using Venar.SVC;
 
 namespace Venar.WF
 {
     public partial class FrmCreateMedic : Form
     {
-        UserServices userServices = new UserServices();
-        SecurityServices securityServices = new SecurityServices();
+        CreateMedicSVC createMedicSVC = new CreateMedicSVC();   
+        ValidCreateMedic validCreateMedicSVC = new ValidCreateMedic();  
+        MedicDto medicDto = new MedicDto();
 
         public FrmCreateMedic()
         {
@@ -38,39 +40,41 @@ namespace Venar.WF
         //
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            string userName = txtUserName.Text.Trim();
-            string name = txtName.Text.Trim();
-            string lastName = txtLastName.Text.Trim();
-            string dni = txtDni.Text.Trim();
-            string mail = txtMail.Text.Trim();
-            string password = txtPassword.Text.Trim();
-            string userType = txtSpeciality.Text.Trim();
-            //string medicalRegistration = txtMedicalRegistration.Text.Trim();
-            var isValidMail = securityServices.IsValidEmail(mail);
 
-
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) ||
-         string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(mail) || string.IsNullOrEmpty(password) ||
-         string.IsNullOrEmpty(userType) ) //Agregar despues de implementar|| string.IsNullOrEmpty(medicalRegistration))
+            medicDto = new MedicDto
             {
-                MessageBox.Show("Todos los campos son obligatorios.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Validar formato de correo electrónico
-            if (!isValidMail)
+                UserName = txtUserName.Text,
+                Name = txtName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
+                Dni = txtDni.Text.Trim(),
+                Mail = txtMail.Text.Trim(),
+                Password = txtPassword.Text.Trim(),
+                Specialty = txtSpecialty.Text.Trim(),
+                MedicalRegistration = txtMedicalRegistration.Text.Trim()
+            };                        
+            //VERIFICAR TAMBIEN QUE NO HAYA OTRO MAIL IGUAL EN LA BASE DE DATOS
+            var isValidMail = validCreateMedicSVC.IsValidEmail(txtMail.Text.Trim());
+            if(isValidMail != false)
             {
-                MessageBox.Show("Por favor, ingrese un correo electrónico válido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                ResultDto result = validCreateMedicSVC.CreateReallyUser(medicDto);
+                if (result.IsSuccess)
+                {
+                    // El médico fue creado con éxito, cerrar el formulario
+                    MessageBox.Show("El médico ha sido registrado con éxito.");
+                    this.Close();
+                }
+                else
+                {
+                    // Mostrar los errores de validación
+                    string errorMessage = string.Join("\n", result.Errors);
+                    MessageBox.Show(errorMessage, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            //Implementar cunado solicuionemos las FK de User + Medics
-            //userServices.CreateMedic(userName, name, lastName, dni, mail, password, speciality, medicalRegistration);
-            userServices.CreateUser( userName,  name,  lastName,  dni,  mail,  password,  userType);
-
-            this.Close();
 
             
+
+            // Verificar si la validación fue exitosa
+                               
             
         }
 
