@@ -14,13 +14,9 @@ using Venar.Entities;
 
 
 
-<<<<<<< Updated upstream:Venar.SVC/DataServices.cs
-namespace Venar.SVC
-{  
-=======
+
 namespace Venar.Data
 {
->>>>>>> Stashed changes:Venar.Data/DataServices.cs
 
     public class DataServices
     {
@@ -96,15 +92,6 @@ namespace Venar.Data
 
         }
     }
-<<<<<<< Updated upstream:Venar.SVC/DataServices.cs
-}
-=======
 
-
-
-            
-    
-
->>>>>>> Stashed changes:Venar.Data/DataServices.cs
 
 

@@ -12,107 +12,82 @@ using System.IO;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Venar.SVC
-{
-    public class PatientsSVC
+
+
+    namespace Venar.SVC
     {
-
-        DataServices dataService = new DataServices();
-
-        public void CreatePatient(string name, string lastName, string dni, DateTime dateofBirth, short gender,
-          string location, string medicalCoverage)
+        public class PatientsSVC
         {
-            var conn = dataService.OpenConnection();
 
-            string query = "INSERT INTO Patients (name,lastName,dni,DateOfBirth,gender,location,medicalCoverage) VALUES (@Name,@LastName,@Dni,@DateOfBirth,@Gender,@Location,@MedicalCoverage)";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@DateOfBirth", dateofBirth);
-                cmd.Parameters.AddWithValue("@Gender", gender);
-                cmd.Parameters.AddWithValue("@Location", location);
-                cmd.Parameters.AddWithValue("@MedicalCoverage", medicalCoverage);
-
-                cmd.ExecuteNonQuery();
-
-
-            }
-        }
-
-        public List<Patient> MostrarPat()
-
-        {
             DataServices dataService = new DataServices();
-            var conn = dataService.OpenConnection();
-            List<Patient> pats = new List<Patient>();
 
-            string query = "SELECT Dni,Name,LastName,MedicalCoverage FROM patients";
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-
+            public int CreatePatient(Patient patient)
             {
-                SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                Dictionary<string, string> Parts = new Dictionary<string, string>();
 
+                string query = "INSERT INTO Patients (name, lastName, dni, DateOfBirth, gender, location, medicalCoverage) VALUES (@Name, @LastName, @Dni, @DateOfBirth, @Gender, @Location, @MedicalCoverage)";
+
+
+                Parts.Add("@Name", patient.name);
+                Parts.Add("@LastName", patient.lastName);
+                Parts.Add("@Dni", patient.dni.ToString());
+                Parts.Add("@DateOfBirth", patient.DateOfBirth.ToString());
+                Parts.Add("@Gender", patient.gender.ToString());
+                Parts.Add("@Location", patient.location);
+                Parts.Add("@MedicalCoverage", patient.MedicalCoverage);
+
+
+                var executeResult = dataService.Execute(query, Parts);
+
+                return executeResult;
+            }
+
+
+            public bool UpdatePatient(Patient patient)
+            {
+                bool result = false;
+                Dictionary<string, string> parts = new Dictionary<string, string>();
+                string query = "UPDATE patients SET Name = @Name, LastName = @LastName, MedicalCoverage = @MedicalCoverage, gender =@Gender,location =@Location WHERE dni = @Dni";
+                parts.Add("@Name", patient.name);
+                parts.Add("@LastName", patient.lastName);
+                parts.Add("@MedicalCoverage", patient.MedicalCoverage);
+                parts.Add("@Gender", patient.gender.ToString());
+                parts.Add("@Location", patient.location);
+
+                var dev = dataService.Execute(query, parts);
+
+                return result;
+
+            }
+
+
+            public Patient SearchPat(int dni)
+            {
+                Dictionary<string, string> parts = new Dictionary<string, string>();
+                string query = "SELECT Name, LastName, MedicalCoverage FROM patients WHERE dni = @Dni";
+
+                parts.Add("@Dni", dni.ToString());
+
+                var dev = dataService.Selection(query, parts).Rows[0];
+
+                return new Patient()
                 {
-                    Patient patient = new Patient();
-                    patient.dni = reader.GetInt32(0);
-                    patient.nombre = reader.GetString(1);
-                    patient.apellido = reader.GetString(2);
-                    patient.obraSocialPaciente = reader.GetString(3);
-                    pats.Add(patient);
-                }
+                   
+                    name = dev["@Name"].ToString(),
+                    lastName = dev["@LastName"].ToString(),
+                    location = dev["@Location"].ToString(),
+                    gender = Convert.ToInt16(dev["Gender"]).ToString(),
+                    MedicalCoverage = dev["@MedicalCoverage"].ToString(),
 
+
+
+                };
             }
-            return pats;
+
+
+
+
+
         }
-        public bool UpdatePatient(int dni, string name, string lastName, string cover)
-        {
-            var conn = dataService.OpenConnection();
-            string query = "UPDATE patients SET Name = @Name, LastName = @LastName, MedicalCoverage = @Cover WHERE dni = @Dni";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@Dni", dni);
-                cmd.Parameters.AddWithValue("@Name", name);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
-                cmd.Parameters.AddWithValue("@Cover", cover);
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
-            }
-        }
- 
-
-    public Patient SearchPat(int dni)
-        {
-            var conn = dataService.OpenConnection();
-            string query = "SELECT Name, LastName, MedicalCoverage FROM patients WHERE dni = @Dni";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-
-                cmd.Parameters.AddWithValue("@Dni", dni);
-
-                SqlDataReader r = cmd.ExecuteReader();
-                Patient patient = new Patient();
-                if (r.Read())
-                {
-
-                    patient.nombre = r.GetString(0);
-                    patient.apellido = r.GetString(1);
-                    patient.obraSocialPaciente = r.GetString(2);
-                }
-
-                return patient;
-            }
-        }
-
-     
-
-
-
-    } }
+    }

@@ -12,24 +12,26 @@ namespace Venar.Entities
             public Guid Id { get; set; }
             public string name { get; set; }
             public string lastName { get; set; }
-            public int dni { get; set; }
+            public string dni { get; set; }
             public string MedicalCoverage { get; set; }
+            public DateTime DateOfBirth { get; set; }
             public short gender { get; set; }
-            public string localidad { get; set; }
+            public string location { get; set; }
 
             public Patient()
             {
             }
 
-            public Patient(Guid id, string name, string lastName, int dni, string medicalCoverage, short gender, string localidad)
+            public Patient(Guid id, string name, string lastName, string dni, string medicalCoverage,DateTime DateOfBirth, short gender, string location)
             {
                 Id = id;
                 this.name = name;
                 this.lastName = lastName;
                 this.dni = dni;
                 MedicalCoverage = medicalCoverage;
+                this.DateOfBirth = DateOfBirth;
                 this.gender = gender;
-                this.localidad = localidad;
+                this.location = location;
             }
         }
     }
