@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Data;
-using System.Net;
-using System.Xml.Linq;
-using System.Reflection.Metadata.Ecma335;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Venar.Entities;
+﻿using System.Data.SqlClient;
 
 
 
 namespace Venar.Data
-{  
+{
 
     public class DataServices
     {

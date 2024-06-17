@@ -92,7 +92,7 @@ namespace Venar.WF
 
         private void groupInicio_Enter(object sender, EventArgs e)
         {
-
+            btnLogin_Click(sender, e);      
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

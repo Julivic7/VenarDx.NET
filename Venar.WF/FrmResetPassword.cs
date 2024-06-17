@@ -12,9 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Venar.Entities;
 using Venar.SVC;
-using Venar.DTO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Venar.WF
 {
@@ -23,8 +21,8 @@ namespace Venar.WF
         //Buscar como hacer para extraer el nombre de usuario
         //de la base de datos pasando como parametro el mail
 
-        ResetPasswordSVC resetPasswordSVC = new ResetPasswordSVC();
-        ResetPassDto resetPassDto;
+        //DataServices dataServices = new DataServices();
+
         private string _temporalPass;
         private string setMail;
         private string LoggedUserMail;
@@ -41,27 +39,42 @@ namespace Venar.WF
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             //Validacion de contraseñas correctas
-            resetPassDto = new ResetPassDto
-            {
-                Temporal = _temporalPass,
-                Password = txtMailPass.Text,
-                NewPassword = txtNewPass.Text,
-                NewPasswordConfirm = txtNewPassConfirm.Text,
-                SetMail = setMail
-            };
+            var temporal = _temporalPass;
+            var newPassword = txtNewPassConfirm.Text;
 
-            var result = resetPasswordSVC.ResetPass(resetPassDto);
-            if (result.IsSuccess)
+
+
+            if (txtMailPass.Text == _temporalPass)
             {
-                MessageBox.Show("Contraseña actualizada correctamente.");
+                if (txtNewPass.Text == newPassword)
+                {
+                    //var conn = dataServices.OpenConnection();
+
+                    string query = "UPDATE Users SET Password = @Password,  UpdatedAt = getdate() WHERE mail = @setMail";
+
+                    // Create a new SqlConnection and SqlCommand
+                    using (SqlCommand cmd = new SqlCommand(query))
+                    {
+                        // Add parameters to the command to prevent SQL injection
+                        cmd.Parameters.AddWithValue("@Password", newPassword);
+                        cmd.Parameters.AddWithValue("@setMail", setMail);
+
+                        // Execute the command
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Contraseña actualizada correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("Las nuevas contraseñas no coinciden.");
+                }
             }
             else
             {
-                string errorMessage = string.Join(Environment.NewLine, result.Errors);
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("La contraseña temporal es incorrecta.");
             }
         }
-               
     }
 
 }
