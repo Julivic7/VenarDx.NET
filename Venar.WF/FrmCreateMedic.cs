@@ -80,7 +80,7 @@ namespace Venar.WF
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-
+            btnRegister_Click(sender, e);
         }
     }
 }

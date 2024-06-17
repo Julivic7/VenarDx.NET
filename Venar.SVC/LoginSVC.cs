@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Venar.Data;
 using Venar.Entities;
 
@@ -17,7 +12,6 @@ namespace Venar.SVC
         public User VerifyLogin(string userName, string password)
         {
             string userType = null;
-            
 
             var conn = dataService.OpenConnection();
 
@@ -49,7 +43,11 @@ namespace Venar.SVC
                 }
             }
 
-        }                
+        }
+
+
+        //VERIFIVAR REDISTRIBUCION o ELIMINACION DE LOS SIGUIENTES METODOS
+
         public string RedirectUser(User user)
         {
             if (user.UserType == "ADMIN")
@@ -60,11 +58,12 @@ namespace Venar.SVC
             {
                 return "medic";
             }
-            else 
+            else
             {
                 return null;
             }
         }
+
         public bool VerifyMail(string mail)
         {
             bool loginSuccessful = false;
@@ -105,8 +104,13 @@ namespace Venar.SVC
 
             return loginSuccessful;
         }
-     
-        
+        public string TemporalPassword()
+        {
+            var clave = new Random().Next().ToString();
+
+            return clave;
+        }
+
 
     }
 }

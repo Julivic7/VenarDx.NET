@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Venar.SVC;
-using System.Windows.Forms;
-using Venar.Entities;
+﻿using Venar.SVC;
 
 
 namespace Venar.WF
 {
     public partial class FrmCreatePatient : Form
     {
-        UserServices UserServices;
-        //PatientsSVC patientsSVC;
+        
+        PatientsSVC patientsSVC;
         public FrmCreatePatient()
         {
             InitializeComponent();
+            patientsSVC = new PatientsSVC();
         }
 
 
@@ -41,9 +31,17 @@ namespace Venar.WF
 
         }
 
-        private void btnRegistar_Click(object sender, EventArgs e)
+
+
+
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
-            UserServices = new UserServices();
+            btnRegistar_Click_1(sender, e); 
+        }
+
+        private void btnRegistar_Click_1(object sender, EventArgs e)
+        {
             string Name = txtNamePat.Text;
             string LastName = txtLastNamePat.Text;
             string Dni = txtDniPat.Text;
@@ -53,27 +51,19 @@ namespace Venar.WF
             string Cover = txtMCovPat.Text;
 
 
-            UserServices.CreatePatient(Name, LastName, Dni, DataBirth, Gender, Location, Cover);
-            MessageBox.Show("Paciente registrado exitosamente.");
-
-            // if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Dni) ||
-            //     string.IsNullOrEmpty(DataBirth) || string.IsNullOrEmpty(Gender) ||string.IsNullOrEmpty(Location) || string.IsNullOrEmpty(Cover) )
-
-            //{
-            //  MessageBox.Show("Complete todos los campos");
-
-
-            //else
-            // {
-
+            if (short.TryParse(txtGenderPat.Text, out short gender))
+            {
+                patientsSVC.CreatePatient(Name, LastName, Dni, DataBirth, gender, Location, Cover);
+                MessageBox.Show("Paciente registrado exitosamente.");
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para el género.");
+            }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-    
     }
 }
-     
+
+
 
