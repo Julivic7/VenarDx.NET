@@ -16,8 +16,9 @@ namespace Venar.WF
 {
     public partial class FrmCreatePatient : Form
     {
-        UserServices UserServices;
+        ValidCreatePatient validCreatePatient = new ValidCreatePatient ;
         PatientsSVC patientsSVC;
+
         public FrmCreatePatient()
         {
             InitializeComponent();
@@ -37,15 +38,6 @@ namespace Venar.WF
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
-        
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
@@ -53,26 +45,27 @@ namespace Venar.WF
 
         private void btnRegistar_Click_1(object sender, EventArgs e)
         {
-             UserServices = new UserServices();
-            string Name = txtNamePat.Text;
-            string LastName = txtLastNamePat.Text;
-            string Dni = txtDniPat.Text;
-            DateTime DataBirth = dateTimePicker1.Value;
-            string Gender = txtGenderPat.Text;
-            string Location = txtLocaPat.Text;
-            string Cover = txtMCovPat.Text;
+            Patient patient = new Patient();
+
+            patient.name = txtNamePat.Text;
+            patient.lastName = txtLastNamePat.Text;
+            patient.dni = txtDniPat.Text;
+            patient.gender = txtGenderPat.Text;
+            patient.location = txtLocaPat.Text;
+            patient.DateOfBirth = dateTimePicker1.Value;
+            patient.MedicalCoverage = txtMCovPat.Text;
 
 
-            if (short.TryParse(txtGenderPat.Text, out short gender))
+            validCreatePatient.ValidatePatient(patient);
+
+            if (!validCreatePatient.ValidatePatient(patient))
             {
-                patientsSVC.CreatePatient(Name, LastName, Dni, DataBirth, gender, Location, Cover);
-                MessageBox.Show("Paciente registrado exitosamente.");
+                patientsSVC.CreatePatient(patient);
             }
-            else
-            {
-                MessageBox.Show("Por favor, ingrese un valor válido para el género.");
-            }
+                
         }
+
+
 
     }
     }
