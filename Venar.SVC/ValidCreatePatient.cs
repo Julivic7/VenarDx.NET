@@ -24,7 +24,7 @@ namespace Venar.SVC
                 throw new ArgumentException("El Nombre es obligatorio.");
             }
 
-        o
+        
             if (string.IsNullOrEmpty(patient.lastName))
             {
                 throw new ArgumentException("El Apellido es obligatorio.");

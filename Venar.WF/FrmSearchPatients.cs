@@ -18,12 +18,12 @@ namespace Venar.WF
 
     {
         PatientsSVC patientsSVC;
-        List<Patient> pats;
+     
         public FrmViewPatients()
         {
             InitializeComponent();
             patientsSVC = new PatientsSVC();
-            pats = patientsSVC.MostrarPat();
+            
            
 
         }
@@ -48,10 +48,6 @@ namespace Venar.WF
 
             var pat = patientsSVC.SearchPat(dni);
 
-
-            dataGridView1.Columns.Add("NameColumn", "Nombre");
-            dataGridView1.Columns.Add("LastNameColumn", "Apellido");
-            dataGridView1.Columns.Add("CoverColumn", "Cover");
 
 
             if (pat != null)

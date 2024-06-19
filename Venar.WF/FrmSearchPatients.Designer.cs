@@ -45,6 +45,12 @@
             label8 = new Label();
             button2 = new Button();
             dataGridView1 = new DataGridView();
+            name = new DataGridViewTextBoxColumn();
+            LastName = new DataGridViewTextBoxColumn();
+            Gender = new DataGridViewTextBoxColumn();
+            Location = new DataGridViewTextBoxColumn();
+            MedicalCoverage = new DataGridViewTextBoxColumn();
+            DateOfBirth = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -215,19 +221,67 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { name, LastName, Gender, Location, MedicalCoverage, DateOfBirth });
             dataGridView1.Location = new Point(42, 268);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(719, 102);
+            dataGridView1.Size = new Size(802, 102);
             dataGridView1.TabIndex = 25;
+            // 
+            // name
+            // 
+            name.DataPropertyName = "Name";
+            name.HeaderText = "Name";
+            name.MinimumWidth = 6;
+            name.Name = "name";
+            name.Width = 125;
+            // 
+            // LastName
+            // 
+            LastName.DataPropertyName = "LastName";
+            LastName.HeaderText = "LastName";
+            LastName.MinimumWidth = 6;
+            LastName.Name = "LastName";
+            LastName.Width = 125;
+            // 
+            // Gender
+            // 
+            Gender.DataPropertyName = "Gender";
+            Gender.HeaderText = "Gender";
+            Gender.MinimumWidth = 6;
+            Gender.Name = "Gender";
+            Gender.Width = 125;
+            // 
+            // Location
+            // 
+            Location.DataPropertyName = "location";
+            Location.HeaderText = "Location";
+            Location.MinimumWidth = 6;
+            Location.Name = "Location";
+            Location.Width = 125;
+            // 
+            // MedicalCoverage
+            // 
+            MedicalCoverage.DataPropertyName = "MedicalCoverage";
+            MedicalCoverage.HeaderText = "MedicalCoverage";
+            MedicalCoverage.MinimumWidth = 6;
+            MedicalCoverage.Name = "MedicalCoverage";
+            MedicalCoverage.Width = 125;
+            // 
+            // DateOfBirth
+            // 
+            DateOfBirth.HeaderText = "DateOfBirth";
+            DateOfBirth.MinimumWidth = 6;
+            DateOfBirth.Name = "DateOfBirth";
+            DateOfBirth.Width = 125;
             // 
             // FrmViewPatients
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MediumAquamarine;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(880, 450);
             Controls.Add(dataGridView1);
             Controls.Add(button2);
             Controls.Add(label8);
@@ -272,5 +326,11 @@
         private Label label8;
         private Button button2;
         private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn LastName;
+        private DataGridViewTextBoxColumn Gender;
+        private DataGridViewTextBoxColumn Location;
+        private DataGridViewTextBoxColumn MedicalCoverage;
+        private DataGridViewTextBoxColumn DateOfBirth;
     }
 }
