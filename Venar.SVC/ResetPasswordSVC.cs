@@ -16,39 +16,31 @@ namespace Venar.SVC
 
         public string ResetPass(string temporal, string password, string newPassword, string newPasswordConfirm, string setMail)
         {
-            
             if (password == temporal)
             {
                 if (newPassword == newPasswordConfirm)
                 {
-                    var conn = dataServices.OpenConnection();
+                    Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                { "@Password", newPassword },
+                { "@setMail", setMail }
+            };
 
-                    string query = "UPDATE Users SET Password = @Password,  UpdatedAt = getdate() WHERE mail = @setMail";
+                    dataServices.Execute("UPDATE Users SET Password = @Password,  UpdatedAt = getdate() WHERE mail = @setMail", parameters);
 
-                    // Create a new SqlConnection and SqlCommand
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Add parameters to the command to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@Password", newPassword);
-                        cmd.Parameters.AddWithValue("@setMail", setMail);
-
-                        // Execute the command
-                        cmd.ExecuteNonQuery();
-                    }
                     string message1 = "Contraseña actualizada correctamente.";
 
                     return message1;
                 }
                 else
                 {
-                    return  "Las nuevas contraseñas no coinciden.";
+                    return "Las nuevas contraseñas no coinciden.";
                 }
             }
             else
             {
                 return "La contraseña temporal es incorrecta.";
             }
-            return "";
         }
     }
 }
