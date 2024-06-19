@@ -16,7 +16,7 @@ namespace Venar.SVC
         public bool ValidatePatient(Patient patient)
         {
             
-            var result = true;
+            var result = false;
 
             
             if (string.IsNullOrEmpty(patient.name))
@@ -43,9 +43,9 @@ namespace Venar.SVC
             }
 
            
-            if (string.IsNullOrEmpty(patient.gender) || !(patient.gender == "M" || patient.gender == "F" || patient.gender == "O"))
+            if (string.IsNullOrEmpty(patient.gender) || !(patient.gender == "1" || patient.gender == "2" ))
             {
-                throw new ArgumentException("El Género es obligatorio y debe ser 'M', 'F' o 'O'.");
+                throw new ArgumentException("El Género es obligatorio");
             }
 
            
@@ -61,7 +61,7 @@ namespace Venar.SVC
             }
 
            
-            return result;
+            return result=true;
         }
     }
 

@@ -15,7 +15,7 @@ namespace Venar.WF
 {
     public partial class FrmCreateMedic : Form
     {
-        CreateMedicSVC createMedicSVC = new CreateMedicSVC();   
+        MedicSVC createMedicSVC = new MedicSVC();   
         ValidCreateMedic validCreateMedicSVC = new ValidCreateMedic();  
         MedicDto medicDto = new MedicDto();
 

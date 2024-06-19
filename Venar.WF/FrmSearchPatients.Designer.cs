@@ -44,14 +44,14 @@
             button1 = new Button();
             label8 = new Label();
             button2 = new Button();
-            dataGridView1 = new DataGridView();
+            datagridPatients = new DataGridView();
             name = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
             Gender = new DataGridViewTextBoxColumn();
             Location = new DataGridViewTextBoxColumn();
             MedicalCoverage = new DataGridViewTextBoxColumn();
             DateOfBirth = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)datagridPatients).BeginInit();
             SuspendLayout();
             // 
             // txtBxDniSearch
@@ -218,16 +218,16 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // dataGridView1
+            // datagridPatients
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { name, LastName, Gender, Location, MedicalCoverage, DateOfBirth });
-            dataGridView1.Location = new Point(42, 268);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(802, 102);
-            dataGridView1.TabIndex = 25;
+            datagridPatients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            datagridPatients.Columns.AddRange(new DataGridViewColumn[] { name, LastName, Gender, Location, MedicalCoverage, DateOfBirth });
+            datagridPatients.Location = new Point(42, 268);
+            datagridPatients.Name = "datagridPatients";
+            datagridPatients.RowHeadersWidth = 51;
+            datagridPatients.RowTemplate.Height = 29;
+            datagridPatients.Size = new Size(802, 102);
+            datagridPatients.TabIndex = 25;
             // 
             // name
             // 
@@ -282,7 +282,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MediumAquamarine;
             ClientSize = new Size(880, 450);
-            Controls.Add(dataGridView1);
+            Controls.Add(datagridPatients);
             Controls.Add(button2);
             Controls.Add(label8);
             Controls.Add(button1);
@@ -302,7 +302,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmViewPatients";
             Text = "viewPatients";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)datagridPatients).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -325,7 +325,7 @@
         private Button button1;
         private Label label8;
         private Button button2;
-        private DataGridView dataGridView1;
+        private DataGridView datagridPatients;
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Gender;

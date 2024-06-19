@@ -16,7 +16,7 @@ namespace Venar.WF
 {
     public partial class FrmCreatePatient : Form
     {
-        ValidCreatePatient validCreatePatient = new ValidCreatePatient ;
+        ValidCreatePatient validCreatePatient = new ValidCreatePatient();
         PatientsSVC patientsSVC;
 
         public FrmCreatePatient()
@@ -43,7 +43,7 @@ namespace Venar.WF
 
         }
 
-        private void btnRegistar_Click_1(object sender, EventArgs e)
+        private void btnRegistar_Click(object sender, EventArgs e)
         {
             Patient patient = new Patient();
 
@@ -61,14 +61,15 @@ namespace Venar.WF
             if (!validCreatePatient.ValidatePatient(patient))
             {
                 patientsSVC.CreatePatient(patient);
+                MessageBox.Show("Paciente registrado");
             }
-                
+            else
+            {
+                MessageBox.Show("Error al registrar paciente");
+            }
         }
-
-
-
     }
-    }
+}
 
      
 
