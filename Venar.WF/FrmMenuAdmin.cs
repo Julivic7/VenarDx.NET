@@ -16,7 +16,7 @@ namespace Venar.WF
     public partial class FrmMenuAdmin : Form
     {
         public string LoggedUserName { get; set; }
-        UserServices userServices = new UserServices();
+        DiagnosticSVC userServices = new DiagnosticSVC();
 
         // Constructor that accepts a username parameter
         public FrmMenuAdmin(string userName)
