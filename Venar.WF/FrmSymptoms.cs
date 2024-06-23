@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Venar.SVC;
+﻿using Venar.SVC;
 
 namespace Venar.WF
 {
     public partial class FrmSymptoms : Form
     {
         private SymptomsServices symptomsServices;
+        DiagnosticSVC diagnosticSVC = new DiagnosticSVC();
         public FrmSymptoms()
         {
             InitializeComponent();
@@ -68,7 +58,7 @@ namespace Venar.WF
             }
 
             // Fetch the diagnostic results
-            List<string> illnesses = symptomsServices.GetDiagnostic(selectedSymptomIds);
+            List<string> illnesses = diagnosticSVC.GetDiagnostic(selectedSymptomIds);
 
             if (illnesses.Count > 0)
             {

@@ -15,7 +15,7 @@ namespace Venar.WF
 {
     public partial class FrmCreateMedic : Form
     {
-        CreateMedicSVC createMedicSVC = new CreateMedicSVC();   
+        MedicSVC createMedicSVC = new MedicSVC();   
         ValidCreateMedic validCreateMedicSVC = new ValidCreateMedic();  
         MedicDto medicDto = new MedicDto();
 
@@ -80,7 +80,7 @@ namespace Venar.WF
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-            btnRegister_Click(sender, e);
+
         }
     }
 }

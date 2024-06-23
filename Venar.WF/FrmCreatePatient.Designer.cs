@@ -99,7 +99,7 @@
             btnRegistar.TabIndex = 20;
             btnRegistar.Text = "REGISTRAR";
             btnRegistar.UseVisualStyleBackColor = true;
-            btnRegistar.Click += btnRegistar_Click_1;
+            btnRegistar.Click += btnRegistar_Click;
             // 
             // txtMCovPat
             // 

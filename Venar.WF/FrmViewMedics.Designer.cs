@@ -54,11 +54,11 @@
             // 
             // userServicesBindingSource
             // 
-            userServicesBindingSource.DataSource = typeof(SVC.UserServices);
+            userServicesBindingSource.DataSource = typeof(SVC.DiagnosticSVC);
             // 
             // userServicesBindingSource1
             // 
-            userServicesBindingSource1.DataSource = typeof(SVC.UserServices);
+            userServicesBindingSource1.DataSource = typeof(SVC.DiagnosticSVC);
             // 
             // FrmViewMedics
             // 
