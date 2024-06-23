@@ -9,7 +9,7 @@ namespace Venar.SVC
 {
     public class ValidCreateMedic
     {
-        CreateMedicSVC createMedicSVC = new CreateMedicSVC();
+       MedicSVC createMedicSVC = new MedicSVC();
         private void ValidatedUser(ResultDto result, MedicDto obj)
         {
             if (string.IsNullOrEmpty(obj.Name))

@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Venar.Entities;
+﻿using Venar.DTO;
 using Venar.SVC;
+
 
 namespace Venar.WF
 {
     public partial class FrmMenuAdmin : Form
     {
         public string LoggedUserName { get; set; }
-        UserServices userServices = new UserServices();
+        DiagnosticSVC diagnosticSvc = new DiagnosticSVC();
+        MedicSVC medicSvc = new MedicSVC();
 
         // Constructor that accepts a username parameter
         public FrmMenuAdmin(string userName)
@@ -25,12 +17,10 @@ namespace Venar.WF
             LoggedUserName = userName ?? "usuario";
             labelAdmin.Text = "Bienvenido " + LoggedUserName;
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -54,8 +44,8 @@ namespace Venar.WF
 
         private void btnShowMedic_Click(object sender, EventArgs e)
         {
-            // List<Medic> medics = userServices.GetMedics();
-            //openFormPanel(new FrmViewMedics(medics));
+            List<MedicDto> medics = medicSvc.GetMedics();
+            openFormPanel(new FrmViewMedics(medics));
         }
 
 
@@ -71,6 +61,6 @@ namespace Venar.WF
             this.Hide();
         }
 
-       
+
     }
 }

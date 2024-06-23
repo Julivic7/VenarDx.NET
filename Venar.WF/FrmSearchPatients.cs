@@ -18,21 +18,15 @@ namespace Venar.WF
 
     {
         PatientsSVC patientsSVC;
-        List<Patient> pats;
+     
         public FrmViewPatients()
         {
             InitializeComponent();
             patientsSVC = new PatientsSVC();
-            pats = patientsSVC.MostrarPat();
+            
            
 
         }
-
-
-
-
-      
-
         private void button2_Click(object sender, EventArgs e)
 
         {
@@ -42,79 +36,60 @@ namespace Venar.WF
                 MessageBox.Show("Por favor, ingrese un DNI válido.");
 
             }
-            dataGridView1.Columns.Clear();
-            dataGridView1.Rows.Clear();
+            datagridPatients.Columns.Clear();
+            datagridPatients.Rows.Clear();
 
 
+            datagridPatients.DataSource = patientsSVC.SearchPat(dni);
             var pat = patientsSVC.SearchPat(dni);
+            ; }
+
+                
 
 
-            dataGridView1.Columns.Add("NameColumn", "Nombre");
-            dataGridView1.Columns.Add("LastNameColumn", "Apellido");
-            dataGridView1.Columns.Add("CoverColumn", "Cover");
-
-
-            if (pat != null)
-            {
-
-                dataGridView1.Rows.Add(
-                     pat.nombre,
-                     pat.apellido,
-                     pat.obraSocialPaciente
-                );
-
-                txtNameSearch.Text = pat.nombre;
-                txtBxLastNameSearch.Text = pat.apellido;
-                txtBoxCoverSearch.Text = pat.obraSocialPaciente;
-            }
-
-
-            else MessageBox.Show("Paciente no encontrado");
-        }
+            
+        
 
         private void btnModifyPatient_Click(object sender, EventArgs e)
         {
-            string name = txtNameSearch.Text;
-            string lastName = txtBxLastNameSearch.Text;
-            string cover = txtBoxCoverSearch.Text;
-            int dni = int.Parse(txtBxDniSearch.Text);
+           
 
-            bool update = patientsSVC.UpdatePatient(dni, name, lastName, cover);
+        //    bool update = patientsSVC.UpdatePatient();
 
-            if (update)
-            {
-                MessageBox.Show("Datos del paciente actualizados exitosamente.");
+          //  if (update)
+            //{
+              //  MessageBox.Show("Datos del paciente actualizados exitosamente.");
 
-                dataGridView1.Columns.Clear();
-                dataGridView1.Rows.Clear();
+                //datagridPatients.Columns.Clear();
+                //datagridPatients.Rows.Clear();
 
-                var pat = patientsSVC.SearchPat(dni);
+                //var pat = patientsSVC.SearchPat(dni);
 
 
-                dataGridView1.Columns.Add("NameColumn", "Nombre");
-                dataGridView1.Columns.Add("LastNameColumn", "Apellido");
-                dataGridView1.Columns.Add("CoverColumn", "Cover");
+                //datagridPatients.Columns.Add("NameColumn", "Nombre");
+                //datagridPatients.Columns.Add("LastNameColumn", "Apellido");
+                //datagridPatients.Columns.Add("CoverColumn", "Cover");
 
 
-                if (pat != null)
-                {
+                //if (pat != null)
+                //{
 
-                    dataGridView1.Rows.Add(
-                         pat.nombre,
-                         pat.apellido,
-                         pat.obraSocialPaciente
-                    );
-                }
-                else
+                  //  datagridPatients.Rows.Add(
+                    //     pat.nombre,
+                      //   pat.apellido,
+                        // pat.obraSocialPaciente
+                   // );
+               // }
+               // else
 
-                    MessageBox.Show("Error al actualizar los datos del paciente.");
+                 //   MessageBox.Show("Error al actualizar los datos del paciente.");
 
 
 
             }
         }
     }
-}
+
         
     
 
