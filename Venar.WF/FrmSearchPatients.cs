@@ -54,10 +54,10 @@ namespace Venar.WF
         {
            
 
-        //    bool update = patientsSVC.UpdatePatient();
+           bool update = patientsSVC.UpdatePatient();
 
-          //  if (update)
-            //{
+            if (update)
+            {
               //  MessageBox.Show("Datos del paciente actualizados exitosamente.");
 
                 //datagridPatients.Columns.Clear();
