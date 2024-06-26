@@ -23,10 +23,16 @@ namespace Venar.WF
         {
             InitializeComponent();
             patientsSVC = new PatientsSVC();
+            cmbLocation();
         }
 
 
-
+        private void cmbLocation()
+        {
+            cmbLocations.DataSource= patientsSVC.GetLocations();    
+            cmbLocations.DisplayMember= "nameLocation";
+            cmbLocations.ValueMember= "idLocation";
+        }
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
@@ -51,7 +57,7 @@ namespace Venar.WF
             patient.lastName = txtLastNamePat.Text;
             patient.dni = txtDniPat.Text;
             patient.gender = txtGenderPat.Text;
-            patient.location = txtLocaPat.Text;
+            patient.location = (Locations)cmbLocations.SelectedItem;
             patient.DateOfBirth = dateTimePicker1.Value;
             patient.MedicalCoverage = txtMCovPat.Text;
 
@@ -68,6 +74,8 @@ namespace Venar.WF
                 MessageBox.Show("Error al registrar paciente");
             }
         }
+
+        
     }
 }
 

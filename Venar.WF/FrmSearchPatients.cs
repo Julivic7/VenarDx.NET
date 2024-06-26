@@ -18,13 +18,13 @@ namespace Venar.WF
 
     {
         PatientsSVC patientsSVC;
-     
+
         public FrmViewPatients()
         {
             InitializeComponent();
             patientsSVC = new PatientsSVC();
-            
-           
+
+
 
         }
         private void button2_Click(object sender, EventArgs e)
@@ -42,23 +42,24 @@ namespace Venar.WF
 
             datagridPatients.DataSource = patientsSVC.SearchPat(dni);
             var pat = patientsSVC.SearchPat(dni);
-            ; }
+            ;
+        }
 
-                
 
 
-            
-        
+
+
+
 
         private void btnModifyPatient_Click(object sender, EventArgs e)
         {
-           
 
-           bool update = patientsSVC.UpdatePatient();
 
-            if (update)
+            // bool update = patientsSVC.UpdatePatient();
+
+            //  if (update)
             {
-              //  MessageBox.Show("Datos del paciente actualizados exitosamente.");
+                //  MessageBox.Show("Datos del paciente actualizados exitosamente.");
 
                 //datagridPatients.Columns.Clear();
                 //datagridPatients.Rows.Clear();
@@ -74,21 +75,22 @@ namespace Venar.WF
                 //if (pat != null)
                 //{
 
-                  //  datagridPatients.Rows.Add(
-                    //     pat.nombre,
-                      //   pat.apellido,
-                        // pat.obraSocialPaciente
-                   // );
-               // }
-               // else
+                //  datagridPatients.Rows.Add(
+                //     pat.nombre,
+                //   pat.apellido,
+                // pat.obraSocialPaciente
+                // );
+                // }
+                // else
 
-                 //   MessageBox.Show("Error al actualizar los datos del paciente.");
+                //   MessageBox.Show("Error al actualizar los datos del paciente.");
 
 
 
             }
         }
     }
+}
 
         
     

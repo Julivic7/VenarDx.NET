@@ -49,7 +49,7 @@ namespace Venar.SVC
             }
 
            
-            if (string.IsNullOrEmpty(patient.location))
+            if (string.IsNullOrEmpty(patient.location.ToString()))
             {
                 throw new ArgumentException("La Localización es obligatoria.");
             }

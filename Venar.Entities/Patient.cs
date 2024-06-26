@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Venar.SVC;
 
 namespace Venar.Entities
 {
@@ -16,13 +17,13 @@ namespace Venar.Entities
             public string MedicalCoverage { get; set; }
             public DateTime DateOfBirth { get; set; }
             public string gender { get; set; }
-            public string location { get; set; }
+            public  Locations location { get; set; }
 
             public Patient()
             {
             }
 
-            public Patient(Guid id, string name, string lastName, string dni, string medicalCoverage,DateTime DateOfBirth, string gender, string location)
+            public Patient(Guid id, string name, string lastName, string dni, string medicalCoverage,DateTime DateOfBirth, string gender,Locations location)
             {
                 Id = id;
                 this.name = name;
