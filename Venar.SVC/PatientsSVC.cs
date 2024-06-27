@@ -44,9 +44,30 @@ namespace Venar.SVC
 
             return locations;
         }
-    
 
-    public int CreatePatient(Patient patient)
+        public List<Gender> GetGender()
+        {
+            string query = "SELECT * FROM Gender";
+            List<Gender> genders = new List<Gender>();
+            var dates = dataService.Selection(query, null);
+
+            if (dates != null && dates.Rows.Count > 0)
+            {
+                foreach (DataRow row in dates.Rows)
+                {
+                    genders.Add(new Gender()
+                    {
+                        IdGender = int.Parse(row["GenderId"].ToString()),
+                        NameGender = row["NamGender"].ToString()
+                    });
+                }
+            }
+
+            return genders;
+        }
+
+
+        public int CreatePatient(Patient patient)
         {
 
             Dictionary<string, string> Parts = new Dictionary<string, string>();

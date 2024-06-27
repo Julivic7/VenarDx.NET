@@ -30,10 +30,8 @@
         {
             dateTimePicker1 = new DateTimePicker();
             label1 = new Label();
-            txtGenderPat = new TextBox();
             label8 = new Label();
             btnRegistar = new Button();
-            txtMCovPat = new TextBox();
             txtDniPat = new TextBox();
             txtLastNamePat = new TextBox();
             txtNamePat = new TextBox();
@@ -44,9 +42,10 @@
             label3 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
-            label9 = new Label();
             label10 = new Label();
             cmbLocations = new ComboBox();
+            cmbCoverMed = new ComboBox();
+            cmbGenders = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -72,15 +71,6 @@
             label1.TabIndex = 6;
             label1.Text = "REGISTRAR PACIENTE";
             // 
-            // txtGenderPat
-            // 
-            txtGenderPat.BackColor = Color.WhiteSmoke;
-            txtGenderPat.Location = new Point(616, 98);
-            txtGenderPat.Margin = new Padding(3, 2, 3, 2);
-            txtGenderPat.Name = "txtGenderPat";
-            txtGenderPat.Size = new Size(252, 23);
-            txtGenderPat.TabIndex = 22;
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -103,15 +93,6 @@
             btnRegistar.Text = "REGISTRAR";
             btnRegistar.UseVisualStyleBackColor = true;
             btnRegistar.Click += btnRegistar_Click;
-            // 
-            // txtMCovPat
-            // 
-            txtMCovPat.BackColor = Color.WhiteSmoke;
-            txtMCovPat.Location = new Point(616, 201);
-            txtMCovPat.Margin = new Padding(3, 2, 3, 2);
-            txtMCovPat.Name = "txtMCovPat";
-            txtMCovPat.Size = new Size(252, 23);
-            txtMCovPat.TabIndex = 19;
             // 
             // txtDniPat
             // 
@@ -224,25 +205,14 @@
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Tempus Sans ITC", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(621, 122);
-            label9.Name = "label9";
-            label9.Size = new Size(151, 15);
-            label9.TabIndex = 26;
-            label9.Text = "INGRESE 1 PARA FEMENINO";
-            // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Tempus Sans ITC", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
             label10.Location = new Point(621, 135);
             label10.Name = "label10";
-            label10.Size = new Size(159, 15);
+            label10.Size = new Size(0, 15);
             label10.TabIndex = 27;
-            label10.Text = "INGRESE 2 PARA MASCULINO";
             // 
             // cmbLocations
             // 
@@ -252,6 +222,22 @@
             cmbLocations.Size = new Size(234, 23);
             cmbLocations.TabIndex = 28;
             // 
+            // cmbCoverMed
+            // 
+            cmbCoverMed.FormattingEnabled = true;
+            cmbCoverMed.Location = new Point(607, 196);
+            cmbCoverMed.Name = "cmbCoverMed";
+            cmbCoverMed.Size = new Size(234, 23);
+            cmbCoverMed.TabIndex = 30;
+            // 
+            // cmbGenders
+            // 
+            cmbGenders.FormattingEnabled = true;
+            cmbGenders.Location = new Point(607, 97);
+            cmbGenders.Name = "cmbGenders";
+            cmbGenders.Size = new Size(234, 23);
+            cmbGenders.TabIndex = 31;
+            // 
             // FrmCreatePatient
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -259,9 +245,10 @@
             BackColor = Color.MediumAquamarine;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(906, 297);
+            Controls.Add(cmbGenders);
+            Controls.Add(cmbCoverMed);
             Controls.Add(cmbLocations);
             Controls.Add(label10);
-            Controls.Add(label9);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
@@ -270,13 +257,11 @@
             Controls.Add(txtLastNamePat);
             Controls.Add(txtDniPat);
             Controls.Add(label3);
-            Controls.Add(txtGenderPat);
             Controls.Add(label4);
             Controls.Add(btnRegistar);
             Controls.Add(label5);
             Controls.Add(label6);
             Controls.Add(label8);
-            Controls.Add(txtMCovPat);
             Controls.Add(label7);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
@@ -291,10 +276,8 @@
 
         private DateTimePicker dateTimePicker1;
         private Label label1;
-        private TextBox txtGenderPat;
         private Label label8;
         private Button btnRegistar;
-        private TextBox txtMCovPat;
         private TextBox txtDniPat;
         private TextBox txtLastNamePat;
         private TextBox txtNamePat;
@@ -305,8 +288,10 @@
         private Label label3;
         private Label label2;
         private PictureBox pictureBox1;
-        private Label label9;
         private Label label10;
         private ComboBox cmbLocations;
+      
+        private ComboBox cmbCoverMed;
+        private ComboBox cmbGenders;
     }
 }

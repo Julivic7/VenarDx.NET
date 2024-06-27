@@ -16,14 +16,14 @@ namespace Venar.Entities
             public string dni { get; set; }
             public string MedicalCoverage { get; set; }
             public DateTime DateOfBirth { get; set; }
-            public string gender { get; set; }
+            public Gender gender { get; set; }
             public  Locations location { get; set; }
 
             public Patient()
             {
             }
 
-            public Patient(Guid id, string name, string lastName, string dni, string medicalCoverage,DateTime DateOfBirth, string gender,Locations location)
+            public Patient(Guid id, string name, string lastName, string dni, string medicalCoverage,DateTime DateOfBirth, Gender gender,Locations location)
             {
                 Id = id;
                 this.name = name;

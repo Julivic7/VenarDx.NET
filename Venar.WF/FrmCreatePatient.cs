@@ -24,6 +24,7 @@ namespace Venar.WF
             InitializeComponent();
             patientsSVC = new PatientsSVC();
             cmbLocation();
+            cmbGender();
         }
 
 
@@ -33,7 +34,12 @@ namespace Venar.WF
             cmbLocations.DisplayMember= "nameLocation";
             cmbLocations.ValueMember= "idLocation";
         }
-
+        private void cmbGender()
+        {
+            cmbGenders.DataSource = patientsSVC.GetGender();
+            cmbLocations.DisplayMember = "NameGender";
+            cmbLocations.ValueMember = "IdGender";
+        }
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
