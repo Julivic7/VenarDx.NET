@@ -40,8 +40,8 @@ namespace Venar.WF
             datagridPatients.Rows.Clear();
 
 
-            datagridPatients.DataSource = patientsSVC.SearchPat(dni);
-            var pat = patientsSVC.SearchPat(dni);
+         //   datagridPatients.DataSource = patientsSVC.SearchPat(dni);
+           // var pat = patientsSVC.SearchPat(dni);
             ;
         }
 

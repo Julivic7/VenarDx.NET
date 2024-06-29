@@ -58,13 +58,36 @@ namespace Venar.SVC
                     genders.Add(new Gender()
                     {
                         IdGender = int.Parse(row["GenderId"].ToString()),
-                        NameGender = row["NamGender"].ToString()
+                        NameGender = row["nombre"].ToString()
                     });
                 }
             }
 
             return genders;
         }
+        public List<CoverageMedical> GetCover()
+        {
+            string query = "SELECT *FROM MedicalCoverage";
+            List<CoverageMedical> coverageMedicals = new List<CoverageMedical>();
+            var dates = dataService.Selection(query, null);
+
+            if (dates != null && dates.Rows.Count > 0)
+            {
+                foreach (DataRow row in dates.Rows)
+                {
+                    coverageMedicals.Add(new CoverageMedical()
+                    {
+                        IdCover = int.Parse(row["MedicCoveId"].ToString()),
+                        NameCover = row["name"].ToString() 
+                    });
+                }
+            }
+
+            return coverageMedicals;
+        }
+
+        
+        
 
 
         public int CreatePatient(Patient patient)
@@ -72,16 +95,17 @@ namespace Venar.SVC
 
             Dictionary<string, string> Parts = new Dictionary<string, string>();
 
-            string query = "INSERT INTO Patients (name, lastName, dni, DateOfBirth, gender, location, medicalCoverage) VALUES (@Name, @LastName, @Dni, @DateOfBirth, @Gender, @Location, @MedicalCoverage)";
+            string query = "INSERT INTO Patients (name, lastName, dni, DateOfBirth, GenderId, LocationId, MedicalCoverageId) " +
+                "VALUES (@Name, @LastName, @Dni, @DateOfBirth, @GenderId, @LocationId, @MedicalCoverageId)";
 
 
-            Parts.Add("@Name", patient.name);
-            Parts.Add("@LastName", patient.lastName);
-            Parts.Add("@Dni", patient.dni.ToString());
-            Parts.Add("@DateOfBirth", patient.DateOfBirth.ToString());
-            Parts.Add("@Gender", patient.gender.ToString());
-            Parts.Add("@Location", patient.location.ToString());
-            Parts.Add("@MedicalCoverage", patient.MedicalCoverage);
+            Parts.Add("@Name", patient.Name);
+            Parts.Add("@LastName", patient.LastName);
+            Parts.Add("@Dni", patient.Dni.ToString());
+            Parts.Add("@DateOfBirth", patient.DateOfBirth.ToString("yyyy-MM-dd"));
+            Parts.Add("@GenderId", patient.Gender.IdGender.ToString());
+            Parts.Add("@LocationId", patient.Location.idLocation.ToString());
+            Parts.Add("@MedicalCoverageId", patient.MedicalCoverage.IdCover.ToString());
 
 
             var executeResult = dataService.Execute(query, Parts);
@@ -95,11 +119,11 @@ namespace Venar.SVC
             bool result = false;
             Dictionary<string, string> parts = new Dictionary<string, string>();
             string query = "UPDATE patients SET Name = @Name, LastName = @LastName, MedicalCoverage = @MedicalCoverage, gender =@Gender,location =@Location WHERE dni = @Dni";
-            parts.Add("@Name", patient.name);
-            parts.Add("@LastName", patient.lastName);
-            parts.Add("@MedicalCoverage", patient.MedicalCoverage);
-            parts.Add("@Gender", patient.gender.ToString());
-            parts.Add("@Location", patient.location.ToString());
+            parts.Add("@Name", patient.Name);
+            parts.Add("@LastName", patient.LastName);
+            parts.Add("@MedicalCoverage", patient.MedicalCoverage.ToString());
+            parts.Add("@Gender", patient.Gender.ToString());
+            parts.Add("@Location", patient.Location.ToString());
 
             var dev = dataService.Execute(query, parts);
             result = true;
@@ -108,29 +132,29 @@ namespace Venar.SVC
         }
 
 
-        public Patient SearchPat(int dni)
-        {
-            Dictionary<string, string> parts = new Dictionary<string, string>();
-            string query = "SELECT Name, LastName, MedicalCoverage FROM patients WHERE dni = @Dni";
+       // public Patient SearchPat(int dni)
+        //{
+          //  Dictionary<string, string> parts = new Dictionary<string, string>();
+            //string query = "SELECT Name, LastName, MedicalCoverage FROM patients WHERE dni = @Dni";
 
-            parts.Add("@Dni", dni.ToString());
+            //pa//rts.Add("@Dni", dni.ToString());
 
-            var dev = dataService.Selection(query, parts).Rows[0];
+            //var dev = dataService.Selection(query, parts).Rows[0];
 
-            return new Patient()
-            {
+            //return new Patient()
+            //{
 
-                name = dev["@Name"].ToString(),
-                lastName = dev["@LastName"].ToString(),
-                location = (Locations)dev["@Locations"],
-                gender = Convert.ToInt16(dev["Gender"]).ToString(),
-                MedicalCoverage = dev["@MedicalCoverage"].ToString(),
+              //  Name = dev["@Name"].ToString(),
+                //LastName = dev["@LastName"].ToString(),
+                //Location = (Locations)dev["@Locations"],
+               // Gender = (Gender)dev["Gender"],
+                //MedicalCoverage = (CoverageMedical)dev["@MedicalCoverage"],
 
 
 
-            };
+            //};
         }
 
        
     }
-}
+
