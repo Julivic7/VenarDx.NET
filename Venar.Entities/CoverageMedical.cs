@@ -11,5 +11,7 @@ namespace Venar.Entities
         public int IdCover { get; set; }
         public string NameCover { get; set; }
 
+
+
     }
 }

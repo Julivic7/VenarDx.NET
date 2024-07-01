@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,23 +28,7 @@ namespace Venar.WF
 
 
         }
-        private void button2_Click(object sender, EventArgs e)
 
-        {
-            int dni;
-            if (!int.TryParse(txtBxDniSearch.Text, out dni))
-            {
-                MessageBox.Show("Por favor, ingrese un DNI válido.");
-
-            }
-            datagridPatients.Columns.Clear();
-            datagridPatients.Rows.Clear();
-
-
-         //   datagridPatients.DataSource = patientsSVC.SearchPat(dni);
-           // var pat = patientsSVC.SearchPat(dni);
-            ;
-        }
 
 
 
@@ -89,10 +74,65 @@ namespace Venar.WF
 
             }
         }
+
+        private void btnSearchPat_Click(object sender, EventArgs e)
+        {
+            int dni;
+            if (int.TryParse(txtBxDniSearch.Text, out dni))
+            {
+                if (patientsSVC.VerifyDni(dni))
+                {
+                    Patient patient = patientsSVC.SearchPat(dni);
+                    if (patient != null)
+                    {
+
+                        List<Patient> patientList = new List<Patient>
+                {
+                    new Patient
+                    {
+                        Name = patient.Name,
+                        LastName = patient.LastName,
+
+                        Location = new Locations
+                        {
+                            idLocation = patient.Location.idLocation,
+
+                        },
+
+                        Gender = new Gender
+                        {
+                            IdGender = patient.Gender.IdGender,
+
+                        },
+                        MedicalCoverage= new CoverageMedical
+
+                        {
+                            IdCover=patient.MedicalCoverage.IdCover,
+                        }
+                    }
+                };
+
+                        datagridPatients.DataSource = patientList;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Paciente no encontrado.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("DNI no es válido.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un DNI válido.");
+            }
+        }
+
     }
 }
 
-        
-    
+
 
 

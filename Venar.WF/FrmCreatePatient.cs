@@ -11,6 +11,7 @@ using Venar.SVC;
 using System.Windows.Forms;
 using Venar.Entities;
 using System.Diagnostics.Eventing.Reader;
+using System.Xml.Linq;
 
 
 namespace Venar.WF
@@ -58,10 +59,15 @@ namespace Venar.WF
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void ClearTextBoxes()
         {
-
+            txtNamePat.Text = "";
+            txtLastNamePat.Text = "";
+            txtDniPat.Text = "";
+            dateTimePicker1.Text = "";
+           
         }
+
 
         private void btnRegistar_Click(object sender, EventArgs e)
         {
@@ -86,7 +92,8 @@ namespace Venar.WF
             }
             else {
                 MessageBox.Show("Paciente no registrado");
-        }  
+        }
+            ClearTextBoxes();
         }
     }
 }

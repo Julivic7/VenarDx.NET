@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
 using Venar.DTO;
 using Venar.SVC;
 
@@ -15,32 +6,26 @@ namespace Venar.WF
 {
     public partial class FrmCreateMedic : Form
     {
-        MedicSVC createMedicSVC = new MedicSVC();   
-        ValidCreateMedic validCreateMedicSVC = new ValidCreateMedic();  
+        MenuAdminSVC createMedicSVC = new MenuAdminSVC();
+        ValidCreateMedic validCreateMedicSVC = new ValidCreateMedic();
         MedicDto medicDto = new MedicDto();
 
         public FrmCreateMedic()
         {
             InitializeComponent();
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
         private void label6_Click(object sender, EventArgs e)
         {
-
         }
         private void label5_Click(object sender, EventArgs e)
         {
-
         }
-
         //
         private void btnRegister_Click(object sender, EventArgs e)
         {
-
             medicDto = new MedicDto
             {
                 UserName = txtUserName.Text,
@@ -51,10 +36,12 @@ namespace Venar.WF
                 Password = txtPassword.Text.Trim(),
                 Specialty = txtSpecialty.Text.Trim(),
                 MedicalRegistration = txtMedicalRegistration.Text.Trim()
-            };                        
+            };
             //VERIFICAR TAMBIEN QUE NO HAYA OTRO MAIL IGUAL EN LA BASE DE DATOS
+
             var isValidMail = validCreateMedicSVC.IsValidEmail(txtMail.Text.Trim());
-            if(isValidMail != false)
+
+            if (isValidMail != false)
             {
                 ResultDto result = validCreateMedicSVC.CreateReallyUser(medicDto);
                 if (result.IsSuccess)
@@ -70,12 +57,7 @@ namespace Venar.WF
                     MessageBox.Show(errorMessage, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            
-
             // Verificar si la validación fue exitosa
-                               
-            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Venar.Entities;
+using System.Xml.Linq;
 using Venar.Data;
-using System.IO;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
+using Venar.Entities;
 
 
 
@@ -36,8 +28,8 @@ namespace Venar.SVC
                 {
                     locations.Add(new Locations()
                     {
-                        idLocation = int.Parse(row["LocationId"].ToString()), 
-                        nameLocation = row["Name"].ToString() 
+                        idLocation = int.Parse(row["LocationId"].ToString()),
+                        nameLocation = row["Name"].ToString()
                     });
                 }
             }
@@ -78,7 +70,7 @@ namespace Venar.SVC
                     coverageMedicals.Add(new CoverageMedical()
                     {
                         IdCover = int.Parse(row["MedicCoveId"].ToString()),
-                        NameCover = row["name"].ToString() 
+                        NameCover = row["name"].ToString()
                     });
                 }
             }
@@ -86,8 +78,8 @@ namespace Venar.SVC
             return coverageMedicals;
         }
 
-        
-        
+
+
 
 
         public int CreatePatient(Patient patient)
@@ -131,30 +123,86 @@ namespace Venar.SVC
 
         }
 
+        public bool VerifyDni(int dni)
+        {
+            bool check = false;
+            string query = "SELECT dni FROM Patients WHERE dni=@Dni AND Status = 1";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("@Dni", dni.ToString());
+            DataTable dataTable = dataService.Selection(query, parameters);
 
-       // public Patient SearchPat(int dni)
-        //{
-          //  Dictionary<string, string> parts = new Dictionary<string, string>();
-            //string query = "SELECT Name, LastName, MedicalCoverage FROM patients WHERE dni = @Dni";
+            if (dataTable.Rows.Count > 0)
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+                Debug.WriteLine("Dni no encontrado en la base");
 
-            //pa//rts.Add("@Dni", dni.ToString());
-
-            //var dev = dataService.Selection(query, parts).Rows[0];
-
-            //return new Patient()
-            //{
-
-              //  Name = dev["@Name"].ToString(),
-                //LastName = dev["@LastName"].ToString(),
-                //Location = (Locations)dev["@Locations"],
-               // Gender = (Gender)dev["Gender"],
-                //MedicalCoverage = (CoverageMedical)dev["@MedicalCoverage"],
-
-
-
-            //};
+            }
+            return check;
         }
 
-       
-    }
 
+        public Patient SearchPat(int dni)
+        {
+            // Consulta SQL que incluye JOINs para obtener datos de las tablas relacionadas
+            string query = @"
+    SELECT 
+        Name, 
+        LastName, 
+        GenderId, 
+        LocationId, 
+        CoverageId 
+    FROM 
+        Patients 
+    LEFT JOIN 
+        Location l ON p.LocationId = l.LocationId
+    LEFT JOIN 
+        Gender g ON p.GenderId = g.GenderId
+    LEFT JOIN 
+        MedicalCoverage mc ON p.MedicalCoverageId = mc.MedicCoveId
+    WHERE 
+       dni = @Dni AND Status = 1";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("@Dni", dni.ToString());
+
+            var dataTable = dataService.Selection(query, parameters);
+
+            // Verifica que el DataTable tenga filas
+            if (dataTable.Rows.Count == 0)
+            {
+                return null; // O lanza una excepción si prefieres
+            }
+
+            var result = dataTable.Rows[0];
+
+            Patient patient = new Patient
+            {
+                Name = result["Name"].ToString(),
+                LastName = result["LastName"].ToString(),
+                Dni = Convert.ToInt32(result["Dni"]),
+                DateOfBirth = Convert.ToDateTime(result["DateOfBirth"]),
+
+                Location = new Locations
+                {
+                    idLocation = int.Parse(result["LocationId"].ToString())
+                },
+
+                Gender = new Gender
+                {
+                    IdGender = int.Parse(result["GenderId"].ToString())
+                },
+
+                MedicalCoverage = new CoverageMedical
+                {
+                    IdCover = int.Parse(result["MedicalCoverageId"].ToString())
+                }
+            };
+
+            return patient;
+        }
+    }
+}

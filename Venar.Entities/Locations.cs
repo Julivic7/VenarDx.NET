@@ -10,5 +10,7 @@ namespace Venar.SVC
     {
         public int idLocation { get; set; }
         public string nameLocation { get; set; }
+
+      
     }
 }

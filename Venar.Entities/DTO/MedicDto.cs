@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Venar.DTO
 {
-    public class MedicDto 
+    public class MedicDto
 
     {
-        
-        public int Id { get; set; } 
+        public int MedicId { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Dni { get; set; }
-        public string Mail { get; set; }        
+        public string Mail { get; set; }
         public string Password { get; set; }
         public string Specialty { get; set; }
         public string MedicalRegistration { get; set; }
@@ -28,3 +27,5 @@ namespace Venar.DTO
         }
     }
 }
+
+
